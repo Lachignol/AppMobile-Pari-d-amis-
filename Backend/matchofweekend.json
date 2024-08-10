@@ -1,0 +1,249 @@
+[
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070197",
+      "competitors": [
+        {
+          "name": "Nascimento, Allan"
+        },
+        {
+          "name": "Filho, Jafel"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "flyweight(116-125)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070225",
+      "competitors": [
+        {
+          "name": "Parsons, Jonny"
+        },
+        {
+          "name": "Kinoshita, Yusaku"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "welterweight(156-170)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070201",
+      "competitors": [
+        {
+          "name": "Luciano, Stephanie Bruna"
+        },
+        {
+          "name": "de Oliviera Alencar, Ana Talita"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "strawweight(106-115)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070203",
+      "competitors": [
+        {
+          "name": "Zalal, Youssef"
+        },
+        {
+          "name": "Errens, Jarno"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "featherweight(136-145)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070205",
+      "competitors": [
+        {
+          "name": "Diniz, Jhonata"
+        },
+        {
+          "name": "Williams, Karl"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "heavyweight(206-265)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070213",
+      "competitors": [
+        {
+          "name": "Rosa, Karol"
+        },
+        {
+          "name": "Kianzad, Pannie"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "bantamweight(126-135)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070227",
+      "competitors": [
+        {
+          "name": "Kazama, Toshiomi"
+        },
+        {
+          "name": "Charalampos, Grigoriou"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "bantamweight(126-135)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070195",
+      "competitors": [
+        {
+          "name": "Santos, Yana"
+        },
+        {
+          "name": "Chandler, Chelsea"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "bantamweight(126-135)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52312535",
+      "competitors": [
+        {
+          "name": "Gutierrez, Chris"
+        },
+        {
+          "name": "Le, Quang"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "bantamweight(126-135)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070219",
+      "competitors": [
+        {
+          "name": "Barlow, Danny"
+        },
+        {
+          "name": "Veretennikov, Nikolay"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "welterweight(156-170)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070193",
+      "competitors": [
+        {
+          "name": "Jackson, Damon"
+        },
+        {
+          "name": "Mariscal, Jose"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "featherweight(136-145)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070189",
+      "competitors": [
+        {
+          "name": "Tybura, Marcin"
+        },
+        {
+          "name": "Spivak, Sergey"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 5,
+      "weight_class": "heavyweight(206-265)",
+      "title_fight": false,
+      "main_event": true
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52070191",
+      "competitors": [
+        {
+          "name": "Gutierrez, Chris"
+        },
+        {
+          "name": "Basharat, Javid"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "bantamweight(126-135)",
+      "title_fight": false,
+      "main_event": false
+    }
+  }
+]

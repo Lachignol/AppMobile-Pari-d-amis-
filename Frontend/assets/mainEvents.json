@@ -1,0 +1,20 @@
+[
+    {
+        "Name": "UFC 304",
+        "Fight": "Edwards vs Muhammad 2",
+        "ImagePath": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_sm/s3/2024-06/072724-ufc-304-edwards-vs-muhammad-2-EVENT-ART.jpg?h=d1cb525d\u0026itok=tL86i44A",
+        "Date": "dim, juil 28 / 4:00 AM CEST / Carte principale"
+    },
+    {
+        "Name": "UFC Abu Dhabi",
+        "Fight": "Sandhagen vs Nurmagomedov",
+        "ImagePath": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_sm/s3/2024-06/080324-ufc-fight-night-sandhagen-vs-nurmagomedov-EVENT-ART.jpg?h=d1cb525d\u0026itok=xiXgf09r",
+        "Date": "Sat, aoû 3 / 9:00 PM CEST / Carte principale"
+    },
+    {
+        "Name": "UFC Fight Night",
+        "Fight": "Tybura vs Spivac 2",
+        "ImagePath": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_sm/s3/image/2024-08/081024-ufc-fight-night-tybura-vs-spivac-2-EVENT-ART.jpg?h=d1cb525d\u0026itok=vcetl77n",
+        "Date": "dim, aoû 11 / 1:00 AM CEST / Carte principale"
+    }
+]
