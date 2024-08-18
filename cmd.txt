@@ -1,0 +1,4 @@
+Pour démararrer le back : 
+go run .
+Pour démarrer le front sur expo en supprimant les caches dans le cas ou l'on change l'adresse ip : 
+npx expo start --reset-cache
