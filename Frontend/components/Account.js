@@ -3,6 +3,7 @@ import React, { useState, useCallback,useEffect } from 'react'
 import { IP } from '@env';
 import * as SecureStore from 'expo-secure-store';
 import * as ImagePicker from 'expo-image-picker';
+import TopBar from "react-native-vector-icons/FontAwesome6";
 
 const Account = ({setUser, user}) => {
   const [image, setImage] = useState(null);
@@ -130,7 +131,12 @@ const Account = ({setUser, user}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Account</Text>
+        <Text>
+          <TopBar
+            name="bars"
+            size={30}
+          />:
+      </Text>
       <TouchableOpacity style={styles.customButton} onPress={async()=>{
         await SecureStore.deleteItemAsync("user")
         setUser(null)
@@ -178,8 +184,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
     padding: 20,
   },
   customButton: {
