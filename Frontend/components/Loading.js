@@ -25,16 +25,10 @@ const Loading = ({navigation}) => {
     >
       <Image style={styles.Image} source={require("../assets/nature.gif")} />
       <View style={styles.overlay}>
-        <Text
-          style={{
-            color: "black",
-            fontSize: 50,
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          Pari d'Amis
-        </Text>
+      <Image
+                style={styles.ImageLogo}
+                source= {require("../assets/logo.png")}
+              />
       </View>
     </View>
   );
@@ -56,7 +50,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
+  ImageLogo:{
+    height:100,
+    width:"70%",
+    alignItems: "center"
+  },
 });
 
 export default Loading;

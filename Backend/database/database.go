@@ -2,9 +2,11 @@ package database
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/adatechschool/projet-mobile-pari_damis/models"
+	"github.com/joho/godotenv"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -14,10 +16,11 @@ var DB *gorm.DB
 var Err error
 
 func ConnectToDatabase() {
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Error loading .env file")
-	// }
+	if _, exists := os.LookupEnv("RAILWAY_ENVIRONMENT"); exists == false {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal("error loading .env file:", err)
+		}
+	}
 	dsn := os.Getenv("DATABASE")
 	DB, Err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if Err != nil {

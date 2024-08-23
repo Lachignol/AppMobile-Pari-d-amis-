@@ -32,8 +32,11 @@ const Overboard = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
-      <Text style={styles.title}>Pari d'Amis</Text>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Image
+                style={styles.ImageLogo}
+                source= {require("../assets/logoBlackAndWhite.png")}
+              />
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
@@ -156,7 +159,9 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   infoUnderImage:{
-    top:50,
+    top:40,
+    padding:2,
+    fontWeight: "700",
     color:"white",
     fontSize:15,
   },
@@ -167,9 +172,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   Image: {
-    top:50,
+    top:30,
     width: "100%",
     height: 450,
     resizeMode: "cover",
   },
+  ImageLogo:{
+    top:40,
+    height:90,
+    width:"55%",
+    alignItems: "center"
+  }
 });
