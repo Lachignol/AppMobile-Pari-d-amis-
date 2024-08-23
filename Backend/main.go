@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
@@ -30,6 +31,11 @@ func main() {
 	r := gin.Default()
 	r.Static("/static", "./static")
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3001"
+	}
+
 	fmt.Println("Server online")
 	routes.Routes(r)
 	// scheduler.Match()
@@ -39,5 +45,5 @@ func main() {
 	// scrapping.ScrappingAllFightersInfos()
 	// fmt.Println("Monday of the current week:", helper.GetMondayOfCurrentWeek())
 	// fmt.Println("Friday of the current week:", helper.GetFridayOfCurrentWeek())
-	r.Run("0.0.0.0:3001") //
+	r.Run(":" + port) //
 }
