@@ -1,0 +1,15 @@
+{
+    "builds": [
+      {
+        "src": "cmd/main.go",
+        "use": "@vercel/go",
+        "config": {
+          "output": "myapp"
+        }
+      }
+    ],
+    "routes": [
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "myapp" }
+    ]
+  }

@@ -31,7 +31,7 @@ const Overboard = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: "black" }}>
       <Text style={styles.title}>Pari d'Amis</Text>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <View
@@ -54,13 +54,13 @@ const Overboard = ({ navigation }) => {
                 style={styles.Image}
                 source= {{uri: mainEventImage[mainEventImage.length-1].ImagePath}}
               />
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-1].Name}
               </Text>
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-1].Fight}
               </Text>
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-1].Date}
               </Text>
             </View>
@@ -75,13 +75,13 @@ const Overboard = ({ navigation }) => {
                 style={styles.Image}
                 source= {{uri: mainEventImage[mainEventImage.length-2].ImagePath}}
               />
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-2].Name}
               </Text>
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-2].Fight}
               </Text>
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-2].Date}
               </Text>
             </View>
@@ -90,19 +90,20 @@ const Overboard = ({ navigation }) => {
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
+                color:"white",
               }}
             >
               <Image
                 style={styles.Image}
                 source= {{uri: mainEventImage[mainEventImage.length-3].ImagePath}}
                 />
-                <Text>
+                <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-3].Name}
               </Text>
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-3].Fight}
               </Text>
-              <Text>
+              <Text style={styles.infoUnderImage}>
               {mainEventImage[mainEventImage.length-3].Date}
               </Text>
             </View>
@@ -127,7 +128,7 @@ const Overboard = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => showAlert("Login")}>
             {/* onPress={() => navigation.navigate("Login")} */}
-            <Text style={{ color: "black", paddingTop: 10 }}>SE CONNECTER</Text>
+            <Text style={{ color: "white", paddingTop: 10 }}>SE CONNECTER</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -139,32 +140,36 @@ export default Overboard;
 
 const styles = StyleSheet.create({
   title: {
-    color: "black",
+    color: "white",
     fontSize: 50,
     fontWeight: "bold",
     textAlign: "center",
-    top: 100,
+    top: 80,
   },
   customButton: {
     borderBottomColor: "black",
-    backgroundColor: "black",
+    backgroundColor: "white",
     padding: 10,
     margin: 5,
     marginTop: 20,
     borderRadius: 8,
     width: "90%",
   },
+  infoUnderImage:{
+    top:50,
+    color:"white",
+    fontSize:15,
+  },
   buttonText: {
-    color: "white",
+    color: "black",
     fontWeight: "700",
     alignItems: "center",
     textAlign: "center",
   },
   Image: {
+    top:50,
     width: "100%",
-
-    height: 400,
-
+    height: 450,
     resizeMode: "cover",
   },
 });

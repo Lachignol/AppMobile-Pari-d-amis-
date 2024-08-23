@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Alert,
   Switch,
+  TouchableOpacity,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
@@ -31,6 +32,7 @@ const CreateBet = ({ route, navigation, user }) => {
 
   const matchMaxRound = matchInfo.sport_event_status.scheduled_length;
   // console.log(matchMaxRound);
+  
 
   const [winnerWithoutRounds, setWinnerWithoutRounds] = useState("");
   const [finishWithoutRounds, setFinishWithoutRounds] = useState("");
@@ -121,35 +123,33 @@ const CreateBet = ({ route, navigation, user }) => {
       <Text style={styles.title}>
         {firstFigther} VS {secondFigther}
       </Text>
-      <Text style={styles.firstBoxOfBet}>Winner Du Match</Text>
       <View style={styles.winners}>
-        <View
-          style={
-            winner === firstFigther ? styles.winnerButton : styles.normalButton
-          }
-        >
-          <Button
+      <Text style={styles.firstBoxOfBet}>Winner Du Match</Text>
+      <View style={styles.winnerchoice}>
+          <TouchableOpacity
             title={firstFigther}
-            color={winner === firstFigther ? "#ffffff" : "#ffffff"}
             onPress={() => setWinner(firstFigther)}
-          />
-        </View>
-        <View
-          style={
-            winner === secondFigther ? styles.winnerButton : styles.normalButton
-          }
-        >
-          <Button
+          >
+            <Text style={
+            winner === firstFigther ? styles.winnerButton : styles.normalButton
+          }>{firstFigther}</Text>
+          </TouchableOpacity>
+        
+          <TouchableOpacity
             title={secondFigther}
-            color={winner === secondFigther ? "#ffffff" : "#ffffff"}
             onPress={() => setWinner(secondFigther)}
-          />
-        </View>
+          >
+
+          <Text  style={
+            winner === secondFigther ? styles.winnerButton : styles.normalButton
+          }>{secondFigther}</Text>
+          </TouchableOpacity>
+      
       </View>
       {winner && (
         <>
           <Text style={styles.titleTypeWin}>{winner} gagnant par: </Text>
-          <View>
+          <View style={styles.parentVictoryType}>
             <View style={styles.victoryTypes}>
               <View style={styles.koTko}>
                 <Text style={styles.koTkoTitle}>KoTko </Text>
@@ -182,6 +182,7 @@ const CreateBet = ({ route, navigation, user }) => {
                 />
               </View>
             </View>
+            {!isEnabledPoints &&(
             <View style={styles.roundsWin}>
               {[...Array(matchMaxRound)].map((_, i) => (
                 <View key={i}>
@@ -196,6 +197,8 @@ const CreateBet = ({ route, navigation, user }) => {
                 </View>
               ))}
             </View>
+            )
+            }
             <Button
               title="Valider mon pari"
               onPress={async () => {
@@ -271,6 +274,7 @@ const CreateBet = ({ route, navigation, user }) => {
         </>
       )}
     </View>
+    </View>
   );
 };
 
@@ -281,57 +285,73 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
+    width:"100%",
     backgroundColor: "black",
     borderTopColor: "red",
     borderTopWidth: 2,
   },
   title: {
+    backgroundColor:"white",
+    width:"90%",
+    textAlign:"center",
+    height:"5%",
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 25,
+    color: "black",
+  },
+  winners: {
+    flexDirection: "column",
+    backgroundColor:"white",
+    width:"100%",
+    // justifyContent: "space-between",
+  },
+  firstBoxOfBet: {
+    fontSize: 16,
+    marginBottom: 12,
+    color: "black",
+    textAlign:"center",
+  },
+  winnerchoice:{
+    width:"auto",
+    flexDirection:"row",
+    justifyContent:"center",
+  },
+  normalButton: {
+    flexDirection: "row",
     color: "white",
+    backgroundColor: "black",
+    marginLeft: 15,
+  },
+  winnerButton: {
+    flexDirection: "row",
+    color: "black",
+    backgroundColor: "#FEE71F",
+    marginLeft: 15,
+  },
+  parentVictoryType:{
+    width:"90%",
+    height:"20%",
+    backgroundColor:"blue",
   },
   victoryTypes: {
+    backgroundColor:"white",
+    width:"100%",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     marginLeft: 15,
   },
   koTko: {
     marginRight: 15,
   },
   koTkoTitle: {
-    color: "white",
+    color: "black",
   },
   submission: {
-    color: "white",
+    color: "black",
   },
   points: {
-    color: "white",
-  },
-  firstBoxOfBet: {
-    fontSize: 16,
-    marginBottom: 12,
-    color: "white",
-  },
-  winners: {
-    flexDirection: "row",
-    // justifyContent: "space-between",
-  },
-  normalButton: {
-    flexDirection: "row",
-    color: "white",
-    backgroundColor: "red",
-    marginLeft: 15,
-    borderRadius: 25,
-  },
-  winnerButton: {
-    flexDirection: "row",
-    color: "white",
-    backgroundColor: "#bb0b0b",
-    borderColor: "#FF6600",
-    borderWidth: 3,
-    marginLeft: 15,
-    borderRadius: 25,
+    color: "black",
   },
   titleTypeWin: {
     color: "white",

@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   Text,
@@ -5,128 +6,96 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Dimensions,
 } from "react-native";
-import { IP, APIKEY } from '@env';
-import React, { useState, useEffect } from "react";
-import { Dimensions } from "react-native";
+import { IP } from "@env";
 import Fightersjson from "../allFighters.json";
+import { useFocusEffect } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get("window").width;
-import { useFocusEffect } from "@react-navigation/native";
-//const {width, height} = Dimensions.get('window') //detection dela dimension ecran
 
-const Bet = ({route, user}) => {
-  const [renderFlag, setRenderFlag] = useState(false);
+const Bet = ({ route, user, navigation }) => {
   const UfcSilhouetteRightStance =
   "https://www.ufc.com/themes/custom/ufc/assets/img/standing-stance-right-silhouette.png";
   const UfcSilhouetteLeftStance =
   "https://www.ufc.com/themes/custom/ufc/assets/img/standing-stance-left-silhouette.png";
-  const [matchIdOfUser, setMatchId] = useState([]);
+  const [matchIdOfUser, setMatchIdOfUser] = useState([]);
   const [matchIdOfEventByDate, setMatchIdOfEventByDate] = useState(null);
   const [fightersName, setFightersName] = useState([]);
-  const [ allMatchIdOfEventByDate, setAllMatchIdOfEventByDate ] = useState([]);
-  const groupId = route.params.ID
-  const userId = user.user.ID
-  
+  const [allMatchIdOfEventByDate, setAllMatchIdOfEventByDate] = useState([]);
+  const groupId = route.params.ID;
+  const userId = user.user.ID;
 
-  const cleanArr = () => {
-    setFightersName([])
-  }
+  // Fonction pour supprimer les accents
+  const strNoAccent = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
 
+  // Fonction pour obtenir la date du prochain samedi
+  const getNextSaturdayDate = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const diff = 6 - dayOfWeek;
+    const nextSaturday = new Date(today);
+    nextSaturday.setDate(today.getDate() + diff);
+    return nextSaturday.toISOString().slice(0, 10);
+  };
+
+  const nextSaturdayDate = getNextSaturdayDate();
 
   useFocusEffect(
-    React.useCallback(() => {
-
-      const getNextSundayDate = () => {
-        const today = new Date();
-        const dayOfWeek = today.getDay();
-        const diff = 7 - dayOfWeek;
-        const nextSunday = new Date(today);
-        nextSunday.setDate(today.getDate() + diff);
-        return nextSunday.toISOString().slice(0, 10);
-      };
-      const getNextSaturdayDate = () => {
-        const today = new Date();
-        const dayOfWeek = today.getDay();
-        const diff = 6 - dayOfWeek;
-        const nextSunday = new Date(today);
-        nextSunday.setDate(today.getDate() + diff);
-        return nextSunday.toISOString().slice(0, 10);
-      };
-      const nextSundayDate = getNextSundayDate();
-      const nextSaturdayDate = getNextSaturdayDate();
-
-    const getBetOfUserByGroupId  = async () => {
-      try {
-        const response = await fetch(
-          `http://${IP}:3001/bet/betOfUserByGroupOfThisWeek/${groupId}/${userId}/`,
-          {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json",
-            },
-          }
-        );
-        const json = await response.json();
-        const matchIdOfUser = json.message.map((id) => id.MatchID);
-        setMatchId(matchIdOfUser);
-      } catch (error) {
-        console.log("Error message", error);
-      }
-    };
-
-
-    function strNoAccent(str) {
-      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
-
-    const getIdOfMatchByEventDate = () => {
+    useCallback(() => {
+      const fetchData = async () => {
         try {
-          fetch(`http://${IP}:3001/matchsofthewe/whithoutFilter`,{
-          }).then(response => response.json())
-          .then(json => setAllMatchIdOfEventByDate([...json.matches]))
-          const matchIdOfEventByDate = allMatchIdOfEventByDate.map((sportEvent) => {
+          // Requête pour obtenir les paris de l'utilisateur pour le groupe cette semaine
+          const response = await fetch(
+            `http://${IP}:3001/bet/betOfUserByGroupOfThisWeek/${groupId}/${userId}/`
+          );
+          const json = await response.json();
+          const matchIdOfUser = json.message.map((id) => id.MatchID);
+          setMatchIdOfUser(matchIdOfUser);
+
+          // Requête pour obtenir les matchs de la semaine
+          const matchResponse = await fetch(
+            `http://${IP}:3001/matchsofthewe/whithoutFilter`
+          );
+          const matchJson = await matchResponse.json();
+          setAllMatchIdOfEventByDate([...matchJson.matches]);
+
+          const matchIdOfEventByDate = matchJson.matches.map((sportEvent) => {
             const obj = {};
             obj["sportEventID"] = sportEvent.sport_event.id;
-            obj["sportEventCombatant1"] =
-              strNoAccent(sportEvent.sport_event.competitors[0].name);
-            obj["sportEventCombatant2"] =
-              strNoAccent(sportEvent.sport_event.competitors[1].name);
+            obj["sportEventCombatant1"] = strNoAccent(
+              sportEvent.sport_event.competitors[0].name
+            );
+            obj["sportEventCombatant2"] = strNoAccent(
+              sportEvent.sport_event.competitors[1].name
+            );
             return obj;
           });
           setMatchIdOfEventByDate([...matchIdOfEventByDate]);
-          // console.log(matchIdOfEventByDate)
-          setRenderFlag(true);
+
+          // Mettez à jour les noms des combattants une fois que les données sont disponibles
+          if (matchIdOfUser.length > 0 && matchIdOfEventByDate.length > 0) {
+            const fightersNameArray = matchIdOfEventByDate.filter((match) =>
+              matchIdOfUser.includes(match.sportEventID)
+            );
+            setFightersName(fightersNameArray);
+          }
         } catch (error) {
           console.log("Error message", error);
         }
-    };
-    const getFightersNameOfBet = async () => {
-      try {
-        if (matchIdOfEventByDate && matchIdOfUser) {
-          matchIdOfEventByDate.map((matchOfEvent, i) => {
-            if (matchIdOfUser.includes(matchOfEvent["sportEventID"])) {
-              setFightersName((prev) => [...prev, matchOfEvent]);
-            }
-          });
-        }
-      } catch (error) {
-        console.log("Error messagee", error);
-      }
-    };
-    getIdOfMatchByEventDate();
-    getBetOfUserByGroupId();
-    if (renderFlag) {
-      getFightersNameOfBet();
-    }
-    return cleanArr;
-  }, [matchIdOfUser]))
+      };
 
+      fetchData();
 
+      // Nettoyer l'état lors du démontage
+      return () => {
+        setFightersName([]);
+      };
+    }, [groupId, userId])
+  );
 
-
-  // console.log(fightersName);
-  // const handeTextClick = () => {};
   return (
     <ScrollView style={styles.container}>
       {fightersName?.map((el, idx) => {
@@ -144,6 +113,7 @@ const Bet = ({route, user}) => {
         const indexOfSecondFigther = Fightersjson.map(
           (fighter) => fighter.nom_combattant
         ).indexOf(nameOfsecondFighter.trim());
+
         return (
           <TouchableOpacity
             key={idx}
@@ -205,11 +175,10 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderRadius: 20,
     shadowColor: "black",
-    shadowOffset: {width: 0,height: 10,},
-    shadowOpacity: 0.70,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.7,
     shadowRadius: 4,
-
-elevation: 21,
+    elevation: 21,
   },
   infosBox: {
     flexDirection: "column",
