@@ -28,9 +28,10 @@ func init() {
 	// scrapping.ScrappingImageAllFighters()
 	// myScheduler.Every(1).Day().Thursday().At("11:25").Do(scheduler.Match)
 	// myScheduler.StartAsync()
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if _, exists := os.LookupEnv("RAILWAY_ENVIRONMENT"); exists == false {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal("error loading .env file:", err)
+		}
 	}
 	database.ConnectToDatabase()
 }
