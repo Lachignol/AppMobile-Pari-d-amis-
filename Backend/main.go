@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
+
 	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
+	"github.com/joho/godotenv"
 
 	// helper "github.com/adatechschool/projet-mobile-pari_damis/helper"
 	"github.com/adatechschool/projet-mobile-pari_damis/routes"
@@ -25,6 +28,10 @@ func init() {
 	// scrapping.ScrappingImageAllFighters()
 	// myScheduler.Every(1).Day().Thursday().At("11:25").Do(scheduler.Match)
 	// myScheduler.StartAsync()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	database.ConnectToDatabase()
 }
 func main() {
