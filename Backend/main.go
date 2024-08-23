@@ -45,5 +45,5 @@ func main() {
 	// scrapping.ScrappingAllFightersInfos()
 	// fmt.Println("Monday of the current week:", helper.GetMondayOfCurrentWeek())
 	// fmt.Println("Friday of the current week:", helper.GetFridayOfCurrentWeek())
-	r.Run(":" + port) //
+	r.Run("0.0.0.0:" + port) //
 }
