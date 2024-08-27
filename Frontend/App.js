@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Signup from "./components/Signup";
+import Inscription from "./components/Signup";
 import Login from "./components/Login";
 import Overboard from "./components/Overboard";
 import Loading from "./components/Loading";
@@ -47,9 +47,9 @@ export default function App() {
               {(props) => <PageConfirmation {...props} setUser={setUser} />}
             </Stack.Screen>
             <Stack.Screen
-              name="Signup"
-              component={Signup}
-              options={{ headerShown: false }}
+              name="Inscription"
+              component={Inscription}
+              options={{ headerShown: true }}
             />
             <Stack.Screen
               name="Login"

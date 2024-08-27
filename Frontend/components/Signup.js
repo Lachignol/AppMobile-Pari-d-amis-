@@ -98,13 +98,10 @@ const Signup = ({ navigation }) => {
       <StatusBar 
         hidden="Visible"
       />
-      <View>
-        <Text style={styles.inscription}>Inscription</Text>
-      </View>
       <View style={styles.form}>
         <TextInput
           style={styles.text}
-          placeholder="Firstname"
+          placeholder="Prénom"
           placeholderTextColor="black"
           value={formik.values.Firstname}
           onChangeText={formik.handleChange("Firstname")}
@@ -114,7 +111,7 @@ const Signup = ({ navigation }) => {
         </Text>
         <TextInput
           style={styles.text}
-          placeholder="Lastname"
+          placeholder="Nom"
           placeholderTextColor="black"
           value={formik.values.Lastname}
           onChangeText={formik.handleChange("Lastname")}
@@ -134,7 +131,7 @@ const Signup = ({ navigation }) => {
         </Text>
         <TextInput
           style={styles.text}
-          placeholder="Email "
+          placeholder="Email"
           placeholderTextColor="black"
           value={formik.values.Email}
           onChangeText={formik.handleChange("Email")}
@@ -144,7 +141,7 @@ const Signup = ({ navigation }) => {
         </Text>
         <TextInput
           style={styles.text}
-          placeholder="Password"
+          placeholder="Mot de passe"
           placeholderTextColor="black"
           secureTextEntry={true}
           value={formik.values.Password}
@@ -179,15 +176,6 @@ const Signup = ({ navigation }) => {
 export default Signup;
 
 const styles = StyleSheet.create({
-  inscription: {
-    color: "black",
-    top: 7,
-    fontSize: 30,
-    padding: 5,
-    margin: 5,
-    fontWeight: "800",
-    textAlign: "center",
-  },
   customButton: {
     borderBottomColor: "black",
     backgroundColor: "black",
@@ -212,8 +200,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   text: {
-    borderWidth: 1,
-    borderBottomColor: "black",
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
     padding: 10,
     margin: 5,
     width: "90%",
