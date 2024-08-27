@@ -3,6 +3,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFormik } from "formik";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   View,
   Text,
@@ -15,6 +16,7 @@ import {
   Platform,
   Alert,
   Dimensions,
+  SafeAreaView,
 } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
@@ -92,9 +94,12 @@ const Login = ({ navigation }) => {
   const isFormValid = formik.values.Password.length > 0;
 
   return (
-    <KeyboardAvoidingView
+    <KeyboardAwareScrollView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.form}
+      contentContainerStyle={styles.form}
+      enableOnAndroid={true}
+      extraScrollHeight={40} // Ajustez selon les besoins
+      keyboardShouldPersistTaps="handled"
     >
       <ScrollView
         contentContainerStyle={{
@@ -103,9 +108,6 @@ const Login = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        <View>
-          <Text style={styles.Login}>Login</Text>
-        </View>
         <View style={styles.inputContainer}>
           <View style={styles.inputWrapper}>
             <TextInput
@@ -122,7 +124,7 @@ const Login = ({ navigation }) => {
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.MotDePasse}
-              placeholder="Password"
+              placeholder="Mot de passe"
               placeholderTextColor="black"
               secureTextEntry
               value={formik.values.Password}
@@ -163,22 +165,13 @@ const Login = ({ navigation }) => {
           <Text style={{ color: "blue" }}>Mot de passe oublié</Text>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 
 export default Login;
 
 const styles = StyleSheet.create({
-  Login: {
-    color: "black",
-    bottom: 50,
-    fontSize: 30,
-    padding: 5,
-    margin: 5,
-    fontWeight: "800",
-    textAlign: "center",
-  },
   form: {
     flex: 1,
     justifyContent: "center",
@@ -186,18 +179,19 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "100%",
     gap: 20,
+    bottom: 60,
   },
   inputContainer: {
     width: "100%",
     alignItems: "center",
   },
   inputWrapper: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
     width: windowWidth * 0.9,
     marginBottom: 10,
   },
   Email: {
-    borderWidth: 1,
-    borderBottomColor: "black",
     padding: 10,
     margin: 5,
     color: "black",
@@ -205,8 +199,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   MotDePasse: {
-    borderWidth: 1,
-    borderBottomColor: "black",
     padding: 10,
     margin: 5,
     color: "black",

@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Inscription from "./components/Signup";
-import Login from "./components/Login";
+import Connexion from "./components/Login";
 import Overboard from "./components/Overboard";
 import Loading from "./components/Loading";
 import CreateGroup from "./components/CreateGroup";
@@ -52,9 +52,9 @@ export default function App() {
               options={{ headerShown: true }}
             />
             <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ headerShown: false }}
+              name="Connexion"
+              component={Connexion}
+              options={{ headerShown: true }}
             />
           </>
         ) : (

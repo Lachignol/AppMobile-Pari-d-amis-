@@ -129,7 +129,7 @@ const Overboard = ({ navigation }) => {
           >
             <Text style={styles.buttonText}>S’INSCRIRE</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => showAlert("Login")}>
+          <TouchableOpacity onPress={() => showAlert("Connexion")}>
             {/* onPress={() => navigation.navigate("Login")} */}
             <Text style={{ color: "white", paddingTop: 10 }}>SE CONNECTER</Text>
           </TouchableOpacity>
