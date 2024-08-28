@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -47,7 +48,8 @@ func GetMatchesOfTheWeekEnd(c *gin.Context) {
 }
 
 func getBetOfUserByGroup(groupID, userID string) ([]BetOfUser, error) {
-	url := fmt.Sprintf("http://0.0.0.0:3001/bet/betOfUserByGroupOfThisWeek/%s/%s/", groupID, userID)
+	serveur := os.Getenv("SERVEUR")
+	url := fmt.Sprintf("%s/bet/betOfUserByGroupOfThisWeek/%s/%s/", serveur, groupID, userID)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -78,13 +80,11 @@ func filterMatches(allMatches []MatchOfWeekEnd, betOfUserByGroupID []BetOfUser) 
 	return filteredMatches
 }
 
-
-
 func GetMatchesOfTheWeekEndWhithoutFilter(c *gin.Context) {
 	allMatches, err := GetMatchFromJsonToStruct()
 	if err != nil {
 		log.Println(err)
 	}
-	
+
 	c.JSON(http.StatusOK, gin.H{"matches": allMatches})
 }

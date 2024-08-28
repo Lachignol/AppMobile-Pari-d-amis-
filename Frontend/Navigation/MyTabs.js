@@ -17,7 +17,7 @@ const MyTabs = ({setUser, user}) => {
     screenOptions={{
       title: null,
       headerShown: false,
-      tabBarActiveTintColor: "black",
+      tabBarActiveTintColor: "#f26a29",
       tabBarActiveBackgroundColor: "white",
       tabBarInactiveBackgroundColor: "black",
       tabBarInactiveTintColor: "white",

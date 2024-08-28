@@ -3,6 +3,7 @@ import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
 import { SERVEUR } from '@env';
 import {
+  Image,
   View,
   Text,
   TextInput,
@@ -39,6 +40,7 @@ const MyGroupScreen = ({ navigation, user }) => {
   };
 
   return (
+    <>
     <ScrollView> 
     <View
       style={{
@@ -49,6 +51,12 @@ const MyGroupScreen = ({ navigation, user }) => {
         height: height,
       }}
     >
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Image
+                  style={styles.ImageLogo}
+                  source= {require("../assets/logo.png")}
+                />
+         </View>
       <View style={{ flexDirection: "colum" }}>
         <Text style={{  fontSize: 20, paddingTop: 150, color: "black",fontWeight:"bold" }}>
           Nom du groupe :
@@ -75,6 +83,7 @@ const MyGroupScreen = ({ navigation, user }) => {
       ))}
     </View>
     </ScrollView>
+</>
   );
 };
 
@@ -122,4 +131,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
   },
+  ImageLogo:{
+    top:40,
+    height:90,
+    width:"55%",
+    alignItems: "center"
+  }
 });
