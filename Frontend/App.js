@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Inscription from "./components/Signup";
-import Connexion from "./components/Login";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 import Overboard from "./components/Overboard";
 import Loading from "./components/Loading";
 import CreateGroup from "./components/CreateGroup";
@@ -43,18 +43,57 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="Overboard" component={Overboard} options={{ headerShown: false }}/>
-            <Stack.Screen name="PageConfirmation">
+            <Stack.Screen 
+              name="PageConfirmation"
+              options={{ 
+                headerShown: true, 
+                title: "Confirmation de connection",
+                headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: "white"
+            }}
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: 'black',
+                },
+              }}
+            >
               {(props) => <PageConfirmation {...props} setUser={setUser} />}
             </Stack.Screen>
             <Stack.Screen
-              name="Inscription"
-              component={Inscription}
-              options={{ headerShown: true }}
+              name="Signup"
+              component={Signup}
+              options={{ 
+                headerShown: true, 
+                title: "Inscription",
+                headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: "white"
+            }}
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: 'black',
+                },
+              }}
             />
             <Stack.Screen
-              name="Connexion"
-              component={Connexion}
-              options={{ headerShown: true }}
+              name="Login"
+              component={Login}
+              options={{ 
+                headerShown: true, 
+                title: "Connexion",
+                headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: "white"
+            }}
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: 'black',
+                },
+              }}
             />
           </>
         ) : (

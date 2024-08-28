@@ -50,7 +50,7 @@ export default Home;
 const styles = StyleSheet.create({
   mainContainer:{
     flex: 1, 
-    backgroundColor: "white",
+    backgroundColor: "black",
     alignItems:"center",
   },
   mainCard:{
@@ -60,18 +60,19 @@ const styles = StyleSheet.create({
   infoUnderMainImage:{
     top:45,
     fontWeight: "700",
-    color:"black",
+    color:"white",
     fontSize:15,
     textAlign: "center",
   },
   groupNavigate:{
     top: 40,
-    borderBottomColor: 'black',
+    borderBottomColor: 'white',
     borderBottomWidth: 2,
     width:"35%",
   },
   groupNavigateText:{
     fontWeight: "700",
     textAlign:"center",
+    color:"white",
   },
 });

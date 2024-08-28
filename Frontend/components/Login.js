@@ -19,8 +19,7 @@ import {
   SafeAreaView,
 } from "react-native";
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+const {width, height} = Dimensions.get("window");
 
 const Login = ({ navigation }) => {
   // console.log("test ip", IP);
@@ -96,44 +95,37 @@ const Login = ({ navigation }) => {
   return (
     <KeyboardAwareScrollView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      contentContainerStyle={styles.form}
       enableOnAndroid={true}
       extraScrollHeight={40} // Ajustez selon les besoins
       keyboardShouldPersistTaps="handled"
+      contentContainerStyle={styles.form}
     >
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
         <View style={styles.inputContainer}>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.Email}
               placeholder="Email"
-              placeholderTextColor="black"
+              placeholderTextColor="white"
               value={formik.values.Email}
               onChangeText={formik.handleChange("Email")}
             />
+          </View>
             {formik.errors.Email ? (
               <Text style={styles.errorText}>{formik.errors.Email}</Text>
             ) : null}
-          </View>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.MotDePasse}
               placeholder="Mot de passe"
-              placeholderTextColor="black"
+              placeholderTextColor="white"
               secureTextEntry
               value={formik.values.Password}
               onChangeText={formik.handleChange("Password")}
             />
+          </View>
             {formik.errors.Password ? (
               <Text style={styles.errorText}>{formik.errors.Password}</Text>
             ) : null}
-          </View>
         </View>
         <TouchableOpacity
           style={[
@@ -151,20 +143,14 @@ const Login = ({ navigation }) => {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
+            top:5 
           }}
         >
-          <Text style={{ color: "black" }}>Vous n'avez pas de compte ?</Text>
-          <Button
-            title="S'inscrire"
-            color="blue"
-            titleStyle={{ textAlignVertical: "center" }}
-            onPress={() => navigation.navigate("Signup")}
-          />
+          <Text style={{ color: "white"}}>Vous n'avez pas de compte ?</Text>
+          <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate("Signup")}>
+            <Text style={styles.signUpText}>S'inscrire</Text>
+          </TouchableOpacity>
         </View>
-        <View style={{ marginVertical: 10 }}>
-          <Text style={{ color: "blue" }}>Mot de passe oublié</Text>
-        </View>
-      </ScrollView>
     </KeyboardAwareScrollView>
   );
 };
@@ -174,40 +160,42 @@ export default Login;
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
     width: "100%",
+    height: height,
     gap: 20,
-    bottom: 60,
-  },
+    alignItems: "center",
+    height: height,
+    backgroundColor:"black",
+    paddingTop:150 
+},
   inputContainer: {
     width: "100%",
     alignItems: "center",
   },
   inputWrapper: {
-    borderBottomColor: 'black',
+    borderBottomColor: 'white',
     borderBottomWidth: 2,
-    width: windowWidth * 0.9,
+    width: width * 0.9,
     marginBottom: 10,
   },
   Email: {
     padding: 10,
     margin: 5,
-    color: "black",
+    color: "white",
     fontSize: 20,
     textAlign: "center",
   },
   MotDePasse: {
     padding: 10,
     margin: 5,
-    color: "black",
+    color: "white",
     fontSize: 20,
     textAlign: "center",
   },
   customButton: {
     borderBottomColor: "black",
-    backgroundColor: "black",
+    backgroundColor: "white",
     padding: 10,
     margin: 5,
     marginTop: 20,
@@ -218,7 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
   },
   buttonText: {
-    color: "white",
+    color: "black",
     fontWeight: "700",
     alignItems: "center",
     textAlign: "center",
@@ -228,4 +216,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 5,
   },
+  signUp:{
+    left:5,
+    borderBottomColor: 'white',
+    borderBottomWidth: 2,
+  },
+  signUpText:{
+    color:"white",
+  }, 
 });

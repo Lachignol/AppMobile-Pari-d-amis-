@@ -14,7 +14,6 @@ const PageConfirmation = ({ navigation, route, setUser }) => {
   return (
     <View style={styles.container}>
         {/* <Text style={styles.Confirmer}>Confirmation</Text> */}
-        <Text style={styles.pa}>PA</Text>
         <Text style={styles.connecter}>Vous êtes connecté.</Text>
        <View 
        style={{top:200}}
@@ -23,8 +22,8 @@ const PageConfirmation = ({ navigation, route, setUser }) => {
             await SecureStore.setItemAsync("user", JSON.stringify(obj))
             setUser(obj)
            }}>
-          <Text style={styles.buttonText}> TERMINER</Text>
-        </TouchableOpacity>
+          <Text style={styles.buttonText}>TERMINER</Text>
+          </TouchableOpacity>
           </View>
     </View>
   );
@@ -35,9 +34,8 @@ export default PageConfirmation;
 const styles = StyleSheet.create({
     container:{
       flex: 1,
-      backgroundColor: "white",
+      backgroundColor: "black",
       alignItems:"center",
-      
     },
     Confirmer:{
       color: "black",
@@ -45,31 +43,21 @@ const styles = StyleSheet.create({
       fontSize: 20,
       marginLeft: 30,
     },
-    pa:{
-      color: "black",
-      textAlign: "center",
-      fontSize: 100,
-      fontWeight: "bold",
-      top:100
-      
-    },
     connecter:{
-      color: "black",
+      color: "white",
       fontSize: 30,
       textAlign: "center",
-      top:120
+      top:170
     },
     customButton: {
-      borderBottomColor: "black",
-      backgroundColor: "black",
+      backgroundColor: "white",
       padding: 10,
       margin: 5,
-      marginTop: 20,
       borderRadius: 8,
-      width: 350,
+      width: "100%",
     },
     buttonText: {
-      color: "white",
+      color: "black",
       fontWeight: "700",
       alignItems: "center",
       textAlign: "center",

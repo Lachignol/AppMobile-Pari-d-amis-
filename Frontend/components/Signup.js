@@ -3,7 +3,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFormik } from "formik";
-
 import {
   View,
   Text,
@@ -94,15 +93,12 @@ const Signup = ({ navigation }) => {
 
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" , top:80}}>
-      <StatusBar 
-        hidden="Visible"
-      />
+    <View style={{ flex: 1, backgroundColor: "black"}}>
       <View style={styles.form}>
         <TextInput
           style={styles.text}
           placeholder="Prénom"
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           value={formik.values.Firstname}
           onChangeText={formik.handleChange("Firstname")}
         />
@@ -112,7 +108,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           style={styles.text}
           placeholder="Nom"
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           value={formik.values.Lastname}
           onChangeText={formik.handleChange("Lastname")}
         />
@@ -122,7 +118,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           style={styles.text}
           placeholder="Pseudo"
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           value={formik.values.Pseudo}
           onChangeText={formik.handleChange("Pseudo")}
         />
@@ -132,7 +128,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           style={styles.text}
           placeholder="Email"
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           value={formik.values.Email}
           onChangeText={formik.handleChange("Email")}
         />
@@ -142,7 +138,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           style={styles.text}
           placeholder="Mot de passe"
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           secureTextEntry={true}
           value={formik.values.Password}
           onChangeText={formik.handleChange("Password")}
@@ -160,13 +156,11 @@ const Signup = ({ navigation }) => {
           }}
         >
           <Text style={{ color: "white" }}>
-            Vous avez déjà un compte ?&nbsp;&nbsp;
+            Vous avez déjà un compte ?
           </Text>
-          <Button
-            title="Se connecter"
-            color="blue"
-            onPress={() => navigation.navigate("Login")}
-          />
+          <TouchableOpacity style={styles.signupBtn} onPress={() => navigation.navigate("Login")}>
+            <Text style={styles.btnText}>Se connecter</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -176,9 +170,15 @@ const Signup = ({ navigation }) => {
 export default Signup;
 
 const styles = StyleSheet.create({
+  form: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    gap: 5,
+  },
   customButton: {
-    borderBottomColor: "black",
-    backgroundColor: "black",
+    backgroundColor: "white",
     padding: 10,
     margin: 5,
     marginTop: 20,
@@ -190,24 +190,25 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     alignItems: "center",
     textAlign: "center",
-  },
-  form: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-
-    width: "100%",
-    gap: 10,
+    color:"black",
   },
   text: {
-    borderBottomColor: 'black',
+    borderBottomColor: 'white',
     borderBottomWidth: 2,
     padding: 10,
     margin: 5,
     width: "90%",
     height: 50,
-    color: "black",
+    color: "white",
     fontSize: 20,
     textAlign: "center",
+  },
+  signupBtn:{
+    borderBottomColor: 'white',
+    borderBottomWidth: 2,
+    top:10,
+  },
+  btnText: {
+    color:"white",
   },
 });
