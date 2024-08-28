@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IP } from "@env";
+import { SERVEUR } from "@env";
 import {
   View,
   Text,
@@ -244,7 +244,7 @@ const CreateBet = ({ route, navigation, user }) => {
                 }
                 if (finish.length > 0) {
                   try {
-                    const apiUrl = `http://${IP}:3001/bet/${userId}/${groupID}/${sportEventId}`;
+                    const apiUrl = `${SERVEUR}/bet/${userId}/${groupID}/${sportEventId}`;
                     const res = await fetch(apiUrl, {
                       method: "POST",
                       headers: {

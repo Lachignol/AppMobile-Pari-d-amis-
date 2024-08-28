@@ -1,4 +1,4 @@
-import  {IP}  from '@env';
+import  {SERVEUR}  from '@env';
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
 
     onSubmit: async (values) => {
       try {
-        const apiUrl = `http://${IP}:3001/auth/login`;
+        const apiUrl = `${SERVEUR}/auth/login`;
 
         console.log(
           "log 1",

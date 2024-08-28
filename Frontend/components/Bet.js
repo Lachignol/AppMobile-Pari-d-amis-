@@ -8,7 +8,7 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import { IP } from "@env";
+import { SERVEUR } from "@env";
 import Fightersjson from "../allFighters.json";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -49,7 +49,7 @@ const Bet = ({ route, user, navigation }) => {
         try {
           // Requête pour obtenir les paris de l'utilisateur pour le groupe cette semaine
           const response = await fetch(
-            `http://${IP}:3001/bet/betOfUserByGroupOfThisWeek/${groupId}/${userId}/`
+            `${SERVEUR}/bet/betOfUserByGroupOfThisWeek/${groupId}/${userId}/`
           );
           const json = await response.json();
           const matchIdOfUser = json.message.map((id) => id.MatchID);
@@ -57,7 +57,7 @@ const Bet = ({ route, user, navigation }) => {
 
           // Requête pour obtenir les matchs de la semaine
           const matchResponse = await fetch(
-            `http://${IP}:3001/matchsofthewe/whithoutFilter`
+            `${SERVEUR}/matchsofthewe/whithoutFilter`
           );
           const matchJson = await matchResponse.json();
           setAllMatchIdOfEventByDate([...matchJson.matches]);
