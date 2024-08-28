@@ -28,7 +28,7 @@ import (
 func init() {
 	myScheduler := gocron.NewScheduler(time.Local)
 	// scrapping.ScrappingImageAllFighters()
-	myScheduler.Every(1).Day().Wednesday().At("17:08").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.Every(1).Day().Wednesday().At("17:14").Do(scheduler.GetMatchAndSaveThemInJson)
 	myScheduler.StartAsync()
 	database.ConnectToDatabase()
 }
