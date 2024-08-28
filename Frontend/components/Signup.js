@@ -1,4 +1,4 @@
-import { IP } from '@env';
+import { SERVEUR } from '@env';
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -51,7 +51,7 @@ const Signup = ({ navigation }) => {
 
     onSubmit: async (values) => {
       try {
-        const apiUrl = `http://${IP}:3001/auth/signUp`;  // Remplacez par l'URL réelle de votre API
+        const apiUrl = `${SERVEUR}/auth/signUp`;  // Remplacez par l'URL réelle de votre API
     
         const response = await fetch(apiUrl, {
           method: 'POST',

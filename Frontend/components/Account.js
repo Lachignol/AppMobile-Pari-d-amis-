@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, TextInput, Button, Image,Alert} from 'react-native'
 import React, { useState, useCallback,useEffect } from 'react'
-import { IP } from '@env';
+import { SERVEUR } from '@env';
 import * as SecureStore from 'expo-secure-store';
 import * as ImagePicker from 'expo-image-picker';
 import TopBar from "react-native-vector-icons/FontAwesome6";
@@ -95,8 +95,8 @@ const Account = ({setUser, user}) => {
     });
 
     try {
-      console.log(`Envoi de la requête à : http://${IP}:3001/user/updateAvatarOfUser/${User.ID}`);
-      const response = await fetch(`http://${IP}:3001/user/updateAvatarOfUser/${User.ID}`, {
+      console.log(`Envoi de la requête à : ${SERVEUR}/user/updateAvatarOfUser/${User.ID}`);
+      const response = await fetch(`${SERVEUR}/user/updateAvatarOfUser/${User.ID}`, {
         method: 'PUT',
         body: formData,
         headers: {
@@ -171,7 +171,7 @@ const Account = ({setUser, user}) => {
       </View>
 
       <Image 
-        source={{ uri: `http://${IP}:3001/static/avatar/${User.PathOfAvatar}`}}
+        source={{ uri: `${SERVEUR}/static/avatar/${User.PathOfAvatar}`}}
         style={styles.avatar}
       />
     </SafeAreaView>

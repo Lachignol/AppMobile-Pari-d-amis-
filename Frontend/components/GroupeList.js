@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
-import { IP } from '@env';
+import { SERVEUR } from '@env';
 import {
   View,
   Text,
@@ -17,7 +17,6 @@ import {
 const {width, height} = Dimensions.get('window') //detection dela dimension ecran
 
 const MyGroupScreen = ({ navigation, user }) => {
-  console.log("test ip 2", IP);
   const userID = user.user.ID
   console.log(userID);
   const [allgroupsOfUser, setAllGroupsOfUser] = useState([]);
@@ -26,7 +25,7 @@ const MyGroupScreen = ({ navigation, user }) => {
     React.useCallback(() => {
       const requestGroup = async () => {
         let requete = await axios.get(
-          `http://${IP}:3001/user/groupsOfOneUser/${userID}`
+          `${SERVEUR}/user/groupsOfOneUser/${userID}`
         );
         // console.log(requete.data);
         if (requete.data) setAllGroupsOfUser(requete.data.UserGroup);

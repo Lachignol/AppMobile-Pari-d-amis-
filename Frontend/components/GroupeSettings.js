@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IP } from '@env';
+import { SERVEUR } from '@env';
 import {
   View,
   Text,
@@ -36,7 +36,7 @@ const GroupeSettings = ({ navigation,route, user }) => {
 
   useEffect(() => {
     const fetchUsersOfGroup = () =>{
-      fetch(`http://${IP}:3001/group/usersOfOneGroup/${groupId}`,{
+      fetch(`${SERVEUR}/group/usersOfOneGroup/${groupId}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const GroupeSettings = ({ navigation,route, user }) => {
       .then(json => setUsersOfOneGroup(json.message.users))
     } 
     const fetchAllUsers = () => {
-      fetch(`http://${IP}:3001/user/allUsers`, {
+      fetch(`${SERVEUR}/user/allUsers`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const GroupeSettings = ({ navigation,route, user }) => {
   const inviteMember = async (userToAddId) => {
     try {
       const response = await fetch(
-        `http://${IP}:3001/group/addUserToGroupByCreatorId/${groupId}/${userToAddId}/${userId}`,
+        `${SERVEUR}/group/addUserToGroupByCreatorId/${groupId}/${userToAddId}/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -116,7 +116,7 @@ const GroupeSettings = ({ navigation,route, user }) => {
             try {
               console.log("alert ",userResponse);
               console.log("id du groupe qu'on supprime", groupId);
-              const response = await fetch(`http://${IP}:3001/group/deleteOneGroup/${groupId}/${userId}`,{
+              const response = await fetch(`${SERVEUR}/group/deleteOneGroup/${groupId}/${userId}`,{
                 method: "DELETE",
                 headers: {
                 "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const GroupeSettings = ({ navigation,route, user }) => {
           text: 'ok',
           onPress: async () => {
             try {
-              const response = await fetch(`http://${IP}:3001/group/deleteUserOfGroupByCreatorId/${groupId}/${userToDelete.ID}/${userId}`,{
+              const response = await fetch(`${SERVEUR}/group/deleteUserOfGroupByCreatorId/${groupId}/${userToDelete.ID}/${userId}`,{
                 method:"DELETE",
                 headers: {
                   "Content-Type": "application/json",

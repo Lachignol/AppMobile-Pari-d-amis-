@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { IP } from '@env';
+import { SERVEUR } from '@env';
 import TrophyIcon from "react-native-vector-icons/EvilIcons";
 
 
@@ -13,7 +13,7 @@ const Classement = ({ route, user }) => {
   useEffect(() => {
     const fetchBets = async () => {
       try {
-        const response = await fetch(`http://${IP}:3001/bet/betOfGroup/${groupId}`, {
+        const response = await fetch(`${SERVEUR}/bet/betOfGroup/${groupId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

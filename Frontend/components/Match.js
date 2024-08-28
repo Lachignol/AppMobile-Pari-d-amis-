@@ -6,7 +6,7 @@ import {
   View,
   Image,
 } from "react-native";
-import { IP, APIKEY } from '@env';
+import { SERVEUR, APIKEY } from '@env';
 import React, { useEffect, useState } from "react";
 import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions } from "react-native";
@@ -29,7 +29,7 @@ const Match = ({ route, navigation, user }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      fetch(`http://${IP}:3001/matchsofthewe/${groupID}/${userId}`,{
+      fetch(`${SERVEUR}/matchsofthewe/${groupID}/${userId}`,{
   
       }).then(response => response.json())
       .then(json => setFilteredMatchs(json.matches))

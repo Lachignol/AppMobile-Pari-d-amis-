@@ -85,7 +85,6 @@ const Detail = ({ route }) => {
     </View>
   );
 };
-const toto = [{ tup: "de" }, { tup: "de" }, { tup: "de" }];
 export default Detail;
 
 const styles = StyleSheet.create({
