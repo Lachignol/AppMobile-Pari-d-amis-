@@ -38,7 +38,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "3001"
+		port = "8080"
 	}
 
 	fmt.Println("Server online")
