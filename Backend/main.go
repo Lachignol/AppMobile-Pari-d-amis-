@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"os"
 
 	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 
+	scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
+	"github.com/go-co-op/gocron"
 
 	// helper "github.com/adatechschool/projet-mobile-pari_damis/helper"
 	"github.com/adatechschool/projet-mobile-pari_damis/routes"
@@ -23,10 +26,10 @@ import (
 // "github.com/go-co-op/gocron"
 
 func init() {
-	// myScheduler := gocron.NewScheduler(time.Local)
+	myScheduler := gocron.NewScheduler(time.Local)
 	// scrapping.ScrappingImageAllFighters()
-	// myScheduler.Every(1).Day().Thursday().At("11:25").Do(scheduler.Match)
-	// myScheduler.StartAsync()
+	myScheduler.Every(1).Day().Wednesday().At("16:35").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.StartAsync()
 	database.ConnectToDatabase()
 }
 func main() {
