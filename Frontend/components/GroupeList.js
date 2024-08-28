@@ -17,7 +17,6 @@ import {
 const {width, height} = Dimensions.get('window') //detection dela dimension ecran
 
 const MyGroupScreen = ({ navigation, user }) => {
-  console.log("test ip 2", IP);
   const userID = user.user.ID
   console.log(userID);
   const [allgroupsOfUser, setAllGroupsOfUser] = useState([]);
