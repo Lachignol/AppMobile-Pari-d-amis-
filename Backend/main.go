@@ -25,12 +25,7 @@ import (
 
 func init() {
 	myScheduler := gocron.NewScheduler(time.Local)
-	// scheduleTest := cron.New()
-	// scheduleTest.AddFunc("0 13 * * 4", scheduler.GetMatchAndSaveThemInJson)
-	// scheduleTest.Start()
-	// select {}
-	// scrapping.ScrappingImageAllFighters()
-	myScheduler.Every(1).Day().Wednesday().At("11:20").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.Every(1).Day().Wednesday().At("13:23").Do(scheduler.GetMatchAndSaveThemInJson)
 	myScheduler.StartAsync()
 	database.ConnectToDatabase()
 }
