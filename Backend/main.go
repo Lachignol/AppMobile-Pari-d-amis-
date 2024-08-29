@@ -7,7 +7,7 @@ import (
 
 	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 
-	scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
+	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
 
 	// "github.com/go-co-op/gocron"
@@ -15,7 +15,7 @@ import (
 	// helper "github.com/adatechschool/projet-mobile-pari_damis/helper"
 	"github.com/adatechschool/projet-mobile-pari_damis/routes"
 	"github.com/gin-gonic/gin"
-	"github.com/robfig/cron"
+	// "github.com/robfig/cron"
 )
 
 // "net/http"
@@ -28,9 +28,9 @@ import (
 
 func init() {
 	// myScheduler := gocron.NewScheduler(time.Local)
-	scheduleTest := cron.New()
-	scheduleTest.AddFunc("0 13 * * 4", scheduler.GetMatchAndSaveThemInJson)
-	scheduleTest.Start()
+	// scheduleTest := cron.New()
+	// scheduleTest.AddFunc("0 13 * * 4", scheduler.GetMatchAndSaveThemInJson)
+	// scheduleTest.Start()
 	database.ConnectToDatabase()
 	// select {}
 	// scrapping.ScrappingImageAllFighters()
