@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
+	// "time"
 
-	scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
+	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
-	"github.com/go-co-op/gocron"
+	// "github.com/go-co-op/gocron"
 
 	// helper "github.com/adatechschool/projet-mobile-pari_damis/helper"
 	"github.com/adatechschool/projet-mobile-pari_damis/routes"
@@ -24,15 +24,15 @@ import (
 // "github.com/go-co-op/gocron"
 
 func init() {
-	location, err := time.LoadLocation("America/Los_Angeles") // PST/PDT timezone
-	if err != nil {
-		fmt.Printf("Failed to load location: %v\n", err)
-		return
-	}
+	// location, err := time.LoadLocation("America/Los_Angeles") // PST/PDT timezone
+	// if err != nil {
+	// 	fmt.Printf("Failed to load location: %v\n", err)
+	// 	return
+	// }
 
-	myScheduler := gocron.NewScheduler(location)
-	myScheduler.Every(1).Wednesday().At("04:35").Do(scheduler.GetMatchAndSaveThemInJson) // 13h23 CEST converted to 04h23 PDT
-	myScheduler.StartAsync()
+	// myScheduler := gocron.NewScheduler(location)
+	// myScheduler.Every(1).Wednesday().At("04:35").Do(scheduler.GetMatchAndSaveThemInJson) // 13h23 CEST converted to 04h23 PDT
+	// myScheduler.StartAsync()
 	database.ConnectToDatabase()
 }
 func main() {
