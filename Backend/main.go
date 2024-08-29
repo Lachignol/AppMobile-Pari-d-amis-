@@ -32,7 +32,7 @@ func init() {
 	scheduleTest.AddFunc("0 13 * * 4", scheduler.GetMatchAndSaveThemInJson)
 	scheduleTest.Start()
 	database.ConnectToDatabase()
-	select {}
+	// select {}
 	// scrapping.ScrappingImageAllFighters()
 	// myScheduler.Every(1).Day().Wednesday().At("17:25").Do(scheduler.GetMatchAndSaveThemInJson)
 	// myScheduler.StartAsync()
