@@ -24,7 +24,7 @@ const SearchFighter = ({ navigation, route, user }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-      <TextInput style={styles.input} placeholder="Nom du combatant" value={searchedFighter} onChangeText={setSearchedFighter}/>
+      <TextInput style={styles.input} placeholder="Nom du combatant" value={searchedFighter} onChangeText={setSearchedFighter} placeholderTextColor='white' color="white"/>
       {/* <SearchFilterFighter
         data={allFightersFile}
         input={searchedFighter}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     marginTop: -30,
     paddingTop: 5,
     height: "100%",
-    backgroundColor: "white",
+    backgroundColor: "black",
   },
   searchContainer: {
     alignItems: 'center',
@@ -101,11 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#fa580a',
     width: '80%',
     textAlign: 'center',
   },
   list: {
+    color:"white",
     fontSize: 18,
     marginLeft: 10,
   },

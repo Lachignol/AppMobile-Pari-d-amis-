@@ -66,13 +66,22 @@ const styles = StyleSheet.create({
   },
   groupNavigate:{
     top: 40,
-    borderBottomColor: 'white',
+    borderBottomColor: '#fa580a',
     borderBottomWidth: 2,
+    // borderRadius: 10,
     width:"35%",
+   
   },
   groupNavigateText:{
-    fontWeight: "700",
-    textAlign:"center",
-    color:"white",
+    // borderColor:"black",
+    // fontWeight: "700",
+    // textAlign:"center",
+    // color:"white",
+    color:'#fa580a',
+    textAlign:'center',
+    backgroundColor:'black',
+    // borderRadius: 10,
+    // borderWidth: 1,
+    // borderColor: '#fa580a'
   },
 });
