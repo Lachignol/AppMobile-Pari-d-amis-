@@ -1,18 +1,22 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, TextInput, Button, Image,Alert} from 'react-native'
-import React, { useState, useCallback,useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, TextInput, Button, Image,Alert, RefreshControl,ScrollView, RefreshControlComponent} from 'react-native'
+import React, { useState, useCallback,useEffect,useRef,useFocusEffect, } from 'react'
 import { SERVEUR } from '@env';
 import * as SecureStore from 'expo-secure-store';
 import * as ImagePicker from 'expo-image-picker';
 import TopBar from "react-native-vector-icons/FontAwesome6";
 
-const Account = ({setUser, user}) => {
+const Account = ({setUser, user,navigation}) => {
+  const User = user.user
   const [image, setImage] = useState(null);
   const [imageName, setImageName] = useState(null);
   const [imageType, setImageType] = useState(null);
+  const [showImage, setShowImage] = useState(true);
   const [erreur, setErreur] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const User = user.user
+  console.log(User.PathOfAvatar)
+  
+  
 
   useEffect(() => {
     requestPermission();
@@ -65,8 +69,9 @@ const Account = ({setUser, user}) => {
       setImageName(result.assets[0].fileName);
       setImageType(result.assets[0].type)
       console.log("Image sélectionnée:", result.assets[0].uri);
+      console.log("Image format:", result.assets[0].mimeType);
       console.log("Nom de l'Image :", result.assets[0].fileName);
-      console.log("Type de l'Image:", result.assets[0].fileName)
+      console.log("Type de l'Image:", result.assets[0].type)
       console.log("",result.assets[0].exif);
     } else {
       resetImagePicker()
@@ -91,7 +96,7 @@ const Account = ({setUser, user}) => {
     formData.append('Avatar', {
       uri: image,
       type: imageType,
-      name: imageName
+      name: User.Pseudo
     });
 
     try {
@@ -113,14 +118,16 @@ const Account = ({setUser, user}) => {
       }
       const result = await response.json();
       Alert.alert("Succès", "L'image a été uploadée avec succès.");
-      
+      setShowImage(false)
       setUser(prevUser => ({
         ...prevUser,
         user: {
           ...prevUser.user,
-          PathOfAvatar: imageName
+          PathOfAvatar: User.Pseudo
         }
       }))
+      console.log(User.user)
+      setShowImage(true)
       resetImagePicker();
     } catch (error) {
       console.error('Erreur:', error.message);
@@ -130,6 +137,13 @@ const Account = ({setUser, user}) => {
   };
 
   return (
+  <>
+ {showImage && (
+    <Image 
+  source={{ uri: `${SERVEUR}/static/avatar/${User.PathOfAvatar}`}}
+  style={styles.avatar}
+  />
+)}
     <SafeAreaView style={styles.container}>
         <Text>
           <TopBar
@@ -169,12 +183,8 @@ const Account = ({setUser, user}) => {
           disabled={isLoading}
         />
       </View>
-
-      <Image 
-        source={{ uri: `${SERVEUR}/static/avatar/${User.PathOfAvatar}`}}
-        style={styles.avatar}
-      />
     </SafeAreaView>
+    </>
   )
 }
 
