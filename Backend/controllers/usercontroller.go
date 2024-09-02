@@ -215,14 +215,13 @@ func UpdateAvatarOfUser(c *gin.Context) {
 			})
 			log.Println("Pas d'avatar uploader")
 		}
-	} else {
-		pathOfAvatar, err = helper.UploadFile(c, file)
-		if err != nil {
-			log.Println("probleme lors de l'upload de l'avatar")
-			
-		}
 	}
-
+	pathOfAvatar, err = helper.UploadFile(c, file)
+	log.Println(pathOfAvatar)
+		if err != nil {
+			c.JSON(http.StatusFailedDependency, gin.H{
+				"message": "probleme lors de l'upload de l'avatar",})
+		}
 	var User models.User
 	database.DB.First(&User, id)
 
