@@ -51,7 +51,7 @@ const Signup = ({ navigation }) => {
 
     onSubmit: async (values) => {
       try {
-        const apiUrl = `${SERVEUR}/auth/signUp`;  // Remplacez par l'URL réelle de votre API
+        const apiUrl = `${SERVEUR}/auth/signUp`;  
     
         const response = await fetch(apiUrl, {
           method: 'POST',
@@ -70,7 +70,25 @@ const Signup = ({ navigation }) => {
         });
     
         if (!response.ok) {
-          throw new Error(`Erreur de réseau (statut ${response.status})`);
+          const responseData = await response.json()
+          if (responseData.error == "Mauvais formatage du mdp"){
+            formik.errors.Password = "-12 caractères minimum\n-au moins une majuscule\n-Au moins une lettre minuscule\n-Au moins un chiffre\n-Au moins un caractère spécial (comme @, #, $, %, etc.)"
+          }
+          if (responseData.error == "Le pseudo doit faire au moins 6 caractères"){
+            formik.errors.Pseudo = "Entrez un pseudo d'au moins 6 caractères"
+          }
+          
+          if (responseData.error == "Veuillez saisir une adresse mail valide"){
+            formik.errors.Email = "Veuillez saisir une adresse mail valide"
+          }
+          if (responseData.error == "Email déja existant en base"){
+            formik.errors.Email = "Email deja existant"
+          }
+          if (responseData.error == "Pseudo déja existant en base"){
+            formik.errors.Pseudo = "Pseudo déja pris veuillez changer"
+          }
+          // throw new Error(`Erreur (statut ${responseData.error})`);
+          // throw new Error(`Erreur de réseau (statut ${response.status})`);
         }
     
         const responseData = await response.json();
