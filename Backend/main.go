@@ -28,16 +28,16 @@ import (
 // "github.com/go-co-op/gocron"
 
 func init() {
-	location, err := time.LoadLocation("America/Los_Angeles") // PST/PDT timezone
+	database.ConnectToDatabase()
+	location, err := time.LoadLocation("America/Los_Angeles") 
 	if err != nil {
 		fmt.Printf("Failed to load location: %v\n", err)
 		return
 	}
 
 	myScheduler := gocron.NewScheduler(location)
-	myScheduler.Every(1).Wednesday().At("10:35").Do(scheduler.GetMatchAndSaveThemInJson) // 13h23 CEST converted to 04h23 PDT
+	myScheduler.Every(1).Wednesday().At("10:46").Do(scheduler.GetMatchAndSaveThemInJson) 
 	myScheduler.StartAsync()
-	database.ConnectToDatabase()
 }
 func main() {
 	r := gin.Default()
