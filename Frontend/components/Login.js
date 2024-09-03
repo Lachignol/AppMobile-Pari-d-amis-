@@ -71,6 +71,15 @@ const Login = ({ navigation }) => {
         });
 
         if (!response.ok) {
+          const responseData = await response.json()
+          if (responseData.error == "Email ou password invalide"){
+            formik.errors.Password = "Email ou password invalide"
+          }
+          if (responseData.error == "Mauvais password"){
+            formik.errors.Password = "Mauvais password"
+          }
+
+          
           throw new Error(`Erreur de réseau (statut ${response.status})`);
         }
 

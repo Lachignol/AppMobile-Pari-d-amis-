@@ -3,6 +3,7 @@ package scheduler
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -55,6 +56,10 @@ func GetNextWeekdayDate(weekday time.Weekday) string {
 func GetMatchesForDate(date string) ([]MatchOfWeekEnd, error) {
 	url := fmt.Sprintf("https://api.sportradar.com/mma/trial/v2/en/schedules/%s/summaries.json?api_key=%s", date, os.Getenv("APIKEY"))
 	resp, err := http.Get(url)
+	if resp.StatusCode != http.StatusOK {
+		body, _ := ioutil.ReadAll(resp.Body)
+		return nil, fmt.Errorf("API returned status code %d: %s", resp.StatusCode, string(body))
+	}
 	if err != nil {
 		return nil, err
 	}

@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"time"
 
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
@@ -42,14 +43,14 @@ func Login(c *gin.Context) {
 	database.DB.First(&User, "email =?", body.Email)
 
 	if User.ID == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusNotAcceptable, gin.H{
 			"error": "Email ou password invalide",
 		})
 		return
 	}
 	error := bcrypt.CompareHashAndPassword([]byte(User.Password), []byte(body.Password))
 	if error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusNotAcceptable, gin.H{
 			"error": "Mauvais password",
 		})
 		return
@@ -79,6 +80,7 @@ func Login(c *gin.Context) {
 
 func SignUp(c *gin.Context) {
 	var pathOfAvatar string
+
 	var body struct {
 		Firstname string
 		Lastname  string
@@ -87,12 +89,78 @@ func SignUp(c *gin.Context) {
 		Password  string
 	}
 
+	regexEmail := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+	regexPassword := `^(?:[A-Za-z\d@#$%^&+=!]{12,})$`
+
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "failed to read body",
 		})
 		return
 	}
+
+	re, err := regexp.Compile(regexEmail)
+	if err != nil {
+		log.Println("Erreur de compilation de la regexEmail:", err)
+		return
+	}
+
+	if !re.MatchString(body.Email) {
+		c.JSON(http.StatusNotAcceptable, gin.H{
+			"error": "Veuillez saisir une adresse mail valide",
+		})
+		return
+	}
+
+	var User models.User
+	database.DB.First(&User, "email =?", body.Email)
+
+	if User.ID != 0 {
+		c.JSON(http.StatusNotAcceptable, gin.H{
+			"error": "Email déja existant en base",
+		})
+		return
+	}
+
+	// verif avec regex formatage du mail et meme du password
+
+	database.DB.First(&User, "pseudo  =?", body.Pseudo)
+
+	if User.ID != 0 {
+		c.JSON(http.StatusNotAcceptable, gin.H{
+			"error": "Pseudo déja existant en base",
+		})
+		return
+	}
+
+	if len(body.Pseudo) < 6 {
+		c.JSON(http.StatusNotAcceptable, gin.H{
+			"error": "Le pseudo doit faire au moins 6 caractères",
+		})
+		return
+	}
+
+	re, err = regexp.Compile(regexPassword)
+	if err != nil {
+		log.Println("Erreur de compilation de la regexPassword:", err)
+		return
+	}
+
+	checkPassword := func(password string) bool {
+        return re.MatchString(password) &&
+            regexp.MustCompile(`[a-z]`).MatchString(password) &&
+            regexp.MustCompile(`[A-Z]`).MatchString(password) &&
+            regexp.MustCompile(`\d`).MatchString(password) &&
+            regexp.MustCompile(`[@#$%^&+=!]`).MatchString(password)
+    }
+
+	if !checkPassword(body.Password) {
+		c.JSON(http.StatusNotAcceptable, gin.H{
+			"error": "Mauvais formatage du mdp",
+		})
+		return
+	}
+
 	hash, error := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 	if error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -127,11 +195,14 @@ func SignUp(c *gin.Context) {
 func AddUser(c *gin.Context) {
 	var body struct {
 		Firstname string
+		Lastname  string
+		Pseudo    string
 		Email     string
 		Password  string
 	}
 	c.Bind(&body)
-	user := models.User{Firstname: body.Firstname, Email: body.Email, Password: body.Password}
+
+	user := models.User{Firstname: body.Firstname, Lastname: body.Lastname, Pseudo: body.Pseudo, Email: body.Email, Password: body.Password}
 	result := database.DB.Create(&user)
 	if result.Error != nil {
 		c.Status(400)
@@ -218,10 +289,10 @@ func UpdateAvatarOfUser(c *gin.Context) {
 	}
 	pathOfAvatar, err = helper.UploadFile(c, file)
 	log.Println(pathOfAvatar)
-		if err != nil {
-			c.JSON(http.StatusFailedDependency, gin.H{
-				"message": "probleme lors de l'upload de l'avatar",})
-		}
+	if err != nil {
+		c.JSON(http.StatusFailedDependency, gin.H{
+			"message": "probleme lors de l'upload de l'avatar"})
+	}
 	var User models.User
 	database.DB.First(&User, id)
 

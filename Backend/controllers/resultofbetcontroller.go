@@ -51,7 +51,7 @@ func CreateResultOfBet(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "everything is ok",
 	})
-	return
+	
 }
 
 func GetResultBetsByBetId(c *gin.Context) {
