@@ -41,15 +41,11 @@ func CreateBet(c *gin.Context) {
 		return
 	}
 
-	userId, err := strconv.ParseUint(userIdStr, 10, 64)
-	if err != nil {
+	userId, _ := strconv.ParseUint(userIdStr, 10, 64)
+	
 
-	}
-
-	groupId, err := strconv.ParseUint(groupIdStr, 10, 64)
-	if err != nil {
-
-	}
+	groupId, _ := strconv.ParseUint(groupIdStr, 10, 64)
+	
 	var betTab pq.StringArray
 	if body.BetTab != nil {
 		betTab = *body.BetTab

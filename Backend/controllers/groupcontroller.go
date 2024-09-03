@@ -165,7 +165,7 @@ func DeleteOneGroup(c *gin.Context) {
 	c.JSON(403, gin.H{
 		"message": "Unauthorized",
 	})
-	return
+	
 }
 
 func DeleteUserOfGroupByCreatorId(c *gin.Context) {
