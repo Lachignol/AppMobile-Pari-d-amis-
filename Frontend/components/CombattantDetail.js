@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-//const {width, height} = Dimensions.get('window') //detection dela dimension ecran
+import { View, Text, Image, StyleSheet,Dimensions,ScrollView } from "react-native";
+const {width, height} = Dimensions.get('window') //detection dela dimension ecran
 
 const Detail = ({ route }) => {
   const { item } = route.params;
@@ -13,6 +13,8 @@ const Detail = ({ route }) => {
     "https://www.ufc.com/themes/custom/ufc/assets/img/standing-stance-right-silhouette.png";
 
   return (
+    <ScrollView>
+
     <View style={styles.card}>
       {item.image_path &&
       item.image_path !== defaultImage &&
@@ -41,10 +43,9 @@ const Detail = ({ route }) => {
         <>
           <View style={styles.infoTitleBoxe}>
             <Text style={styles.infoTitleText}>Catégorie:</Text>
-         
-          <View style={styles.info}>
-            <Text style={styles.infoText}> {item.category}</Text>
-          </View>
+              <View style={styles.info}>
+                <Text style={styles.infoText}> {item.category}</Text>
+              </View>
           </View>
         </>
       )}
@@ -151,6 +152,7 @@ const Detail = ({ route }) => {
       )}
       </View>
     </View>
+    </ScrollView>
   );
 };
 export default Detail;
@@ -158,18 +160,16 @@ export default Detail;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "black",
-    // backgroundColor: "white",
     flexDirection: "column",
-
-    // justifyContent: "center",
     alignItems: "center",
-    height: "100%",
+    height: height * 1.2,
   },
   title: {
     textAlign: "center",
-    color: "#fa580a",
+    color: "white",
     fontSize: 30,
     fontWeight: "bold",
+    bottom:13,
   },
   text: {
     color: "black",
@@ -181,13 +181,13 @@ const styles = StyleSheet.create({
     marginTop: 80,
     width: 200,
     height: 200,
-    justifyContent: "flex-start", // Assure que le contenu est aligné en haut
+    justifyContent: "flex-start",
   },
   imageBackgroundDefault: {
     marginTop: 80,
     width: 200,
     height: 200,
-    justifyContent: "flex-start", // Assure que le contenu est aligné en haut
+    justifyContent: "flex-start", 
     shadowColor: "white",
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
@@ -198,38 +198,35 @@ const styles = StyleSheet.create({
     margin: 1,
     borderRadius: 10,
     padding: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fa580a",
+    backgroundColor: "#fd9858",
+    height:"auto",
   },
   infoTitleBoxe: {
     margin: 1,
     borderRadius: 10,
     padding: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    
+    alignContent: "flex-start",
   },
   infoTitleText: {
     color: "black",
     fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    shadowRadius:4,
-    shadowOpacity:0.4,
-    shadowColor:"#fa580a",
+    textAlign: "left", 
+    shadowRadius: 4,
+    shadowOpacity: 0.4,
+    shadowColor: "#fa580a",
+    width: "100%", 
   },
   info: {
-    borderRadius: 8,
     marginBottom: 1,
     padding: 2,
     color: "white",
+    alignItems: "flex-start", 
   },
   infoText: {
-    color: "black",
+    color: "white",
     fontSize: 15,
     fontWeight: "bold",
-    textAlign: "center",
-    
+    width: "100%",
+    marginLeft:0,
   },
 });
