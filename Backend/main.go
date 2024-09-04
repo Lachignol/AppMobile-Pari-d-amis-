@@ -4,29 +4,13 @@ import (
 	"fmt"
 	"os"
 	"time"
-
-	// "time"
-
-	// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 	scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
 	"github.com/go-co-op/gocron"
-
-	// "github.com/go-co-op/gocron"
-
-	// helper "github.com/adatechschool/projet-mobile-pari_damis/helper"
 	"github.com/adatechschool/projet-mobile-pari_damis/routes"
 	"github.com/gin-gonic/gin"
-	// "github.com/robfig/cron"
+	_ "time/tzdata"
 )
-
-// "net/http"
-
-// "time"
-
-// scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
-
-// "github.com/go-co-op/gocron"
 
 func init() {
 	database.ConnectToDatabase()
@@ -52,7 +36,7 @@ func init() {
 	myScheduler := gocron.NewScheduler(location)
 
 	// Planifier la tâche à l'heure correspondante (02:46 UTC correspond à 11:46 Paris)
-	myScheduler.Every(1).Wednesday().At("12:56").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.Every(1).Wednesday().At("13:03").Do(scheduler.GetMatchAndSaveThemInJson)
 
 	// Démarrer le scheduler en mode asynchrone
 	myScheduler.StartAsync()
