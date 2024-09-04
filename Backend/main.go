@@ -35,7 +35,6 @@ func init() {
 		fmt.Println(err)
 		return
 	}
-
 	// Calculer le décalage pour l'Oregon (PST/PDT)
 	// utcNow := time.Now().UTC()
 
@@ -51,7 +50,7 @@ func init() {
 	myScheduler := gocron.NewScheduler(location)
 
 	// Planifier la tâche à l'heure correspondante (02:46 UTC correspond à 11:46 Paris)
-	myScheduler.Every(1).Wednesday().At("03:28").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.Every(1).Do(scheduler.GetMatchAndSaveThemInJson)
 
 	// Démarrer le scheduler en mode asynchrone
 	myScheduler.StartAsync()
