@@ -29,14 +29,27 @@ import (
 
 func init() {
 	database.ConnectToDatabase()
-	location, err := time.LoadLocation("America/Los_Angeles") 
+	location, err := time.LoadLocation("America/Los_Angeles")
 	if err != nil {
-		fmt.Printf("Failed to load location: %v\n", err)
-		return
+		fmt.Printf("Failed to load location 'America/Los_Angeles': %v\n", err)
+		// Essayer un fuseau horaire alternatif "PST8PDT"
+		location, err = time.LoadLocation("PST8PDT")
+		if err != nil {
+			fmt.Printf("Failed to load alternative location 'PST8PDT': %v\n", err)
+			return
+		}
+		fmt.Println("Loaded alternative location 'PST8PDT'")
+	} else {
+		fmt.Println("Loaded location 'America/Los_Angeles'")
 	}
 
+	// Initialiser le scheduler avec le fuseau horaire chargé
 	myScheduler := gocron.NewScheduler(location)
-	myScheduler.Every(1).Wednesday().At("02:46").Do(scheduler.GetMatchAndSaveThemInJson) 
+
+	// Planifier la tâche pour 02h46 heure locale du fuseau chargé
+	myScheduler.Every(1).Wednesday().At("02:55").Do(scheduler.GetMatchAndSaveThemInJson)
+
+	// Démarrer le scheduler en mode asynchrone
 	myScheduler.StartAsync()
 }
 func main() {
