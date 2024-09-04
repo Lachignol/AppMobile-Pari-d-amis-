@@ -1,51 +1,51 @@
 [
   {
     "sport_event": {
-      "id": "sr:sport_event:52070197",
+      "id": "sr:sport_event:53133119",
       "competitors": [
         {
-          "name": "Nascimento, Allan"
+          "name": "Ramaska, Zygimantas"
         },
         {
-          "name": "Filho, Jafel"
+          "name": "Fletcher, Nathan"
         }
       ]
     },
     "sport_event_status": {
       "scheduled_length": 3,
-      "weight_class": "flyweight(116-125)",
+      "weight_class": "featherweight(136-145)",
       "title_fight": false,
       "main_event": false
     }
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070225",
+      "id": "sr:sport_event:52304459",
       "competitors": [
         {
-          "name": "Parsons, Jonny"
+          "name": "Petroski, Andre"
         },
         {
-          "name": "Kinoshita, Yusaku"
+          "name": "Budka, Dylan"
         }
       ]
     },
     "sport_event_status": {
       "scheduled_length": 3,
-      "weight_class": "welterweight(156-170)",
+      "weight_class": "middleweight(171-185)",
       "title_fight": false,
       "main_event": false
     }
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070201",
+      "id": "sr:sport_event:52304559",
       "competitors": [
         {
-          "name": "Luciano, Stephanie Bruna"
+          "name": "Amorim, Jaqueline"
         },
         {
-          "name": "de Oliviera Alencar, Ana Talita"
+          "name": "Demopoulos, Vanessa"
         }
       ]
     },
@@ -58,13 +58,13 @@
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070203",
+      "id": "sr:sport_event:52304587",
       "competitors": [
         {
-          "name": "Zalal, Youssef"
+          "name": "Yizha"
         },
         {
-          "name": "Errens, Jarno"
+          "name": "Santos, Gabriel"
         }
       ]
     },
@@ -77,32 +77,89 @@
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070205",
+      "id": "sr:sport_event:52304479",
       "competitors": [
         {
-          "name": "Diniz, Jhonata"
+          "name": "Dos Santos, Felipe"
         },
         {
-          "name": "Williams, Karl"
+          "name": "Lima, Andre (Bra)"
         }
       ]
     },
     "sport_event_status": {
       "scheduled_length": 3,
-      "weight_class": "heavyweight(206-265)",
+      "weight_class": "flyweight(116-125)",
       "title_fight": false,
       "main_event": false
     }
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070213",
+      "id": "sr:sport_event:52304467",
       "competitors": [
         {
-          "name": "Rosa, Karol"
+          "name": "Dulgarian, Isaac"
         },
         {
-          "name": "Kianzad, Pannie"
+          "name": "Marotte, Brendon"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "lightweight(146-155)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52304471",
+      "competitors": [
+        {
+          "name": "Spann, Ryan"
+        },
+        {
+          "name": "Preux, Ovince Saint"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "light_heavyweight(186-205)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52305581",
+      "competitors": [
+        {
+          "name": "Zhu, Rong"
+        },
+        {
+          "name": "Padilla, Christopher"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "lightweight(146-155)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52307031",
+      "competitors": [
+        {
+          "name": "McGhee, Marcus"
+        },
+        {
+          "name": "Zahabi, Aiemann"
         }
       ]
     },
@@ -115,89 +172,51 @@
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070227",
+      "id": "sr:sport_event:52307033",
       "competitors": [
         {
-          "name": "Kazama, Toshiomi"
+          "name": "Peek, Trevor"
         },
         {
-          "name": "Charalampos, Grigoriou"
+          "name": "Ashmouz, Yanal"
         }
       ]
     },
     "sport_event_status": {
       "scheduled_length": 3,
-      "weight_class": "bantamweight(126-135)",
+      "weight_class": "lightweight(146-155)",
       "title_fight": false,
       "main_event": false
     }
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070195",
+      "id": "sr:sport_event:52307035",
       "competitors": [
         {
-          "name": "Santos, Yana"
+          "name": "Schnell, Matt"
         },
         {
-          "name": "Chandler, Chelsea"
+          "name": "Costa, Alessandro"
         }
       ]
     },
     "sport_event_status": {
       "scheduled_length": 3,
-      "weight_class": "bantamweight(126-135)",
+      "weight_class": "flyweight(116-125)",
       "title_fight": false,
       "main_event": false
     }
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52312535",
+      "id": "sr:sport_event:52634557",
       "competitors": [
         {
-          "name": "Gutierrez, Chris"
+          "name": "Garcia, Steve"
         },
         {
-          "name": "Le, Quang"
-        }
-      ]
-    },
-    "sport_event_status": {
-      "scheduled_length": 3,
-      "weight_class": "bantamweight(126-135)",
-      "title_fight": false,
-      "main_event": false
-    }
-  },
-  {
-    "sport_event": {
-      "id": "sr:sport_event:52070219",
-      "competitors": [
-        {
-          "name": "Barlow, Danny"
-        },
-        {
-          "name": "Veretennikov, Nikolay"
-        }
-      ]
-    },
-    "sport_event_status": {
-      "scheduled_length": 3,
-      "weight_class": "welterweight(156-170)",
-      "title_fight": false,
-      "main_event": false
-    }
-  },
-  {
-    "sport_event": {
-      "id": "sr:sport_event:52070193",
-      "competitors": [
-        {
-          "name": "Jackson, Damon"
-        },
-        {
-          "name": "Mariscal, Jose"
+          "name": "Nelson, Kyle"
         }
       ]
     },
@@ -210,40 +229,59 @@
   },
   {
     "sport_event": {
-      "id": "sr:sport_event:52070189",
+      "id": "sr:sport_event:52307037",
       "competitors": [
         {
-          "name": "Tybura, Marcin"
+          "name": "Andrade, Jessica"
         },
         {
-          "name": "Spivak, Sergey"
+          "name": "Silva, Natalia"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "flyweight(116-125)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52307039",
+      "competitors": [
+        {
+          "name": "Kattar, Calvin"
+        },
+        {
+          "name": "Nelson, Kyle"
+        }
+      ]
+    },
+    "sport_event_status": {
+      "scheduled_length": 3,
+      "weight_class": "featherweight(136-145)",
+      "title_fight": false,
+      "main_event": false
+    }
+  },
+  {
+    "sport_event": {
+      "id": "sr:sport_event:52307121",
+      "competitors": [
+        {
+          "name": "Burns, Gilbert"
+        },
+        {
+          "name": "Brady, Sean"
         }
       ]
     },
     "sport_event_status": {
       "scheduled_length": 5,
-      "weight_class": "heavyweight(206-265)",
+      "weight_class": "welterweight(156-170)",
       "title_fight": false,
       "main_event": true
-    }
-  },
-  {
-    "sport_event": {
-      "id": "sr:sport_event:52070191",
-      "competitors": [
-        {
-          "name": "Gutierrez, Chris"
-        },
-        {
-          "name": "Basharat, Javid"
-        }
-      ]
-    },
-    "sport_event_status": {
-      "scheduled_length": 3,
-      "weight_class": "bantamweight(126-135)",
-      "title_fight": false,
-      "main_event": false
     }
   }
 ]

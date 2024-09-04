@@ -3,7 +3,7 @@ package scheduler
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -11,16 +11,20 @@ import (
 )
 
 func GetMatchAndSaveThemInJson() {
+	fmt.Println("Starting GetMatchAndSaveThemInJson")
+
 	saturdayMatches, err := GetMatchesForDate(GetNextSaturdayDate())
 	if err != nil {
 		log.Println(err)
 	}
+	fmt.Println("Saturday matches retrieved:", len(saturdayMatches))
 	time.Sleep(time.Duration(time.Second) * 4)
 
 	sundayMatches, err := GetMatchesForDate(GetNextSundayDate())
 	if err != nil {
 		log.Println(err)
 	}
+	fmt.Println("Sunday matches retrieved:", len(sundayMatches))
 
 	allmatch := append(saturdayMatches, sundayMatches...)
 	allmatchfinish, err := json.MarshalIndent(allmatch, "", "  ")
@@ -28,11 +32,14 @@ func GetMatchAndSaveThemInJson() {
 		log.Println(err)
 		return
 	}
+	fmt.Println("All matches marshaled into JSON")
+
 	err = os.WriteFile("matchofweekend.json", allmatchfinish, 0644)
 	if err != nil {
 		log.Println("Error writing to file:", err)
 		return
 	}
+	fmt.Println("All matches saved to matchofweekend.json")
 }
 
 func GetNextSaturdayDate() string {
@@ -57,7 +64,7 @@ func GetMatchesForDate(date string) ([]MatchOfWeekEnd, error) {
 	url := fmt.Sprintf("https://api.sportradar.com/mma/trial/v2/en/schedules/%s/summaries.json?api_key=%s", date, os.Getenv("APIKEY"))
 	resp, err := http.Get(url)
 	if resp.StatusCode != http.StatusOK {
-		body, _ := ioutil.ReadAll(resp.Body)
+		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf("API returned status code %d: %s", resp.StatusCode, string(body))
 	}
 	if err != nil {

@@ -36,7 +36,7 @@ func init() {
 	}
 
 	myScheduler := gocron.NewScheduler(location)
-	myScheduler.Every(1).Tuesday().At("11:10").Do(scheduler.GetMatchAndSaveThemInJson) 
+	myScheduler.Every(1).Wednesday().At("02:46").Do(scheduler.GetMatchAndSaveThemInJson) 
 	myScheduler.StartAsync()
 }
 func main() {
