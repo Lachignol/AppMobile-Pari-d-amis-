@@ -46,7 +46,7 @@ func init() {
 	myScheduler := gocron.NewScheduler(location)
 
 	// Planifier la tâche à l'heure correspondante (02:46 UTC correspond à 11:46 Paris)
-	myScheduler.Every(1).Wednesday().At("03:41").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.Every(1).Wednesday().At("10:45").Do(scheduler.GetMatchAndSaveThemInJson)
 
 	// Démarrer le scheduler en mode asynchrone
 	myScheduler.StartAsync()
