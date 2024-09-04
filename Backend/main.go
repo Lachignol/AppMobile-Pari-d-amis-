@@ -35,18 +35,18 @@ func init() {
 	utcNow := time.Now().UTC()
 
 	// Heure en Oregon : UTC-8 (en hiver) ou UTC-7 (en été)
-	oregonTime := utcNow.Add(-8 * time.Hour) // Adapte cette ligne pour UTC-7 si c'est l'heure d'été (PDT)
+	oregonTime := utcNow.Add(-7 * time.Hour) // Adapte cette ligne pour UTC-7 si c'est l'heure d'été (PDT)
 
 	// Formater l'heure locale de l'Oregon (ajuster si nécessaire pour l'heure d'été)
 	oregonHour := oregonTime.Hour()
 	oregonMinute := oregonTime.Minute()
-	fmt.Printf("Oregon Time: %02d:%02d (UTC-%d)\n", oregonHour, oregonMinute, 8) // Ajuste à 7 pour l'heure d'été
+	fmt.Printf("Oregon Time: %02d:%02d (UTC-%d)\n", oregonHour, oregonMinute, 7) // Ajuste à 7 pour l'heure d'été
 
 	// Initialiser le scheduler avec UTC
 	myScheduler := gocron.NewScheduler(location)
 
 	// Planifier la tâche à l'heure correspondante (02:46 UTC correspond à 11:46 Paris)
-	myScheduler.Every(1).Wednesday().At("02:37").Do(scheduler.GetMatchAndSaveThemInJson)
+	myScheduler.Every(1).Wednesday().At("03:41").Do(scheduler.GetMatchAndSaveThemInJson)
 
 	// Démarrer le scheduler en mode asynchrone
 	myScheduler.StartAsync()
