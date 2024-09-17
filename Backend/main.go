@@ -3,24 +3,22 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
-	scheduler "github.com/adatechschool/projet-mobile-pari_damis/Scheduler"
+	_ "time/tzdata"
+
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
-	"github.com/go-co-op/gocron"
 	"github.com/adatechschool/projet-mobile-pari_damis/routes"
 	"github.com/gin-gonic/gin"
-	_ "time/tzdata"
 )
 
 func init() {
 	database.ConnectToDatabase()
-	location, err := time.LoadLocation("Europe/Paris")
-	if err != nil {
-		fmt.Println("error", err)
-		return
-	}
-	parisTime := time.Now().In(location)
-	fmt.Println("Paris Time ?", parisTime)
+	// location, err := time.LoadLocation("Europe/Paris")
+	// if err != nil {
+	// 	fmt.Println("error", err)
+	// 	return
+	// }
+	// parisTime := time.Now().In(location)
+	// fmt.Println("Paris Time ?", parisTime)
 	// Calculer le décalage pour l'Oregon (PST/PDT)
 	// utcNow := time.Now().UTC()
 
@@ -33,13 +31,13 @@ func init() {
 	// fmt.Printf("Oregon Time: %02d:%02d (UTC-%d)\n", oregonHour, oregonMinute, 7) // Ajuste à 7 pour l'heure d'été
 
 	// Initialiser le scheduler avec UTC
-	myScheduler := gocron.NewScheduler(location)
+	// myScheduler := gocron.NewScheduler(location)
 
 	// Planifier la tâche à l'heure correspondante (02:46 UTC correspond à 11:46 Paris)
-	myScheduler.Every(1).Wednesday().At("13:03").Do(scheduler.GetMatchAndSaveThemInJson)
+	// myScheduler.Every(1).Wednesday().At("13:03").Do(scheduler.GetMatchAndSaveThemInJson)
 
 	// Démarrer le scheduler en mode asynchrone
-	myScheduler.StartAsync()
+	// myScheduler.StartAsync()
 }
 func main() {
 	r := gin.Default()
@@ -47,7 +45,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "3001"
 	}
 
 	fmt.Println("Server online")

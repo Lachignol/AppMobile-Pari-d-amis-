@@ -2,12 +2,14 @@ package controllers
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	// "os"
 	// "time"
 
 	"github.com/adatechschool/projet-mobile-pari_damis/database"
+	"github.com/adatechschool/projet-mobile-pari_damis/helper"
 	"github.com/adatechschool/projet-mobile-pari_damis/models"
 	"github.com/gin-gonic/gin"
 	// "github.com/golang-jwt/jwt/v5"
@@ -16,11 +18,14 @@ import (
 
 func CreateGroup(c *gin.Context) {
 	userID := c.Param("userID")
+
+	var pathOfGroupAvatar string
+
 	var body struct {
-		Name         string
-		LimitMembers *uint8
-		Users        []models.User
-		Bets         []models.Bet
+		Name              string
+		LimitMembers  	    *uint8
+		Users             []models.User
+		Bets              []models.Bet
 	}
 
 	if c.Bind(&body) != nil {
@@ -29,15 +34,29 @@ func CreateGroup(c *gin.Context) {
 		})
 		return
 	}
+
+	file, err := c.FormFile("Avatar")
+	if err != nil {
+		if err == http.ErrMissingFile {
+			log.Println("Pas d'avatar uploader")
+		}
+	} else {
+		pathOfGroupAvatar, err = helper.UploadFile(c, file)
+		if err != nil {
+			log.Println("probleme lors de l'upload de l'avatar")
+		}
+	}
+
 	var User models.User
 	database.DB.First(&User, userID)
-	group := models.Group{Name: body.Name, LimitMembers: body.LimitMembers, CreatorId: userID}
+	group := models.Group{Name: body.Name, LimitMembers: body.LimitMembers, CreatorId: userID, PathOfGroupAvatar: pathOfGroupAvatar}
 	result := database.DB.Create(&group)
 	database.DB.Model(&group).Association("Users").Append(&User)
 	if result.Error != nil {
 		c.Status(400)
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"group":     group,
 		"groupID":   group.ID,
@@ -74,24 +93,24 @@ func AddUserToGroupByCreatorId(c *gin.Context) {
 	database.DB.First(&Group, groupId)
 	database.DB.First(&Group, creatorId)
 
-	if err:= database.DB.First(&Group, groupId).Error; err != nil{
-		c.JSON(404, gin.H{"error":"Group not found"})
+	if err := database.DB.First(&Group, groupId).Error; err != nil {
+		c.JSON(404, gin.H{"error": "Group not found"})
 		return
 	}
-	if Group.CreatorId != creatorId{
-		c.JSON(403, gin.H{"error":"Only the creator can add users"})
+	if Group.CreatorId != creatorId {
+		c.JSON(403, gin.H{"error": "Only the creator can add users"})
 		return
 	}
 	if userId == creatorId {
-        c.JSON(403, gin.H{"error": "Creator cannot add themselve to the group"})
-        return
-    }
-	if err := database.DB.First(&User, userId).Error; err != nil{
-		c.JSON(404, gin.H{"error":"User not found"})
+		c.JSON(403, gin.H{"error": "Creator cannot add themselve to the group"})
 		return
 	}
-	if err := database.DB.Model(&Group).Association("Users").Append(&User); err != nil{
-		c.JSON(400, gin.H{"error":"Error adding user to group"})
+	if err := database.DB.First(&User, userId).Error; err != nil {
+		c.JSON(404, gin.H{"error": "User not found"})
+		return
+	}
+	if err := database.DB.Model(&Group).Association("Users").Append(&User); err != nil {
+		c.JSON(400, gin.H{"error": "Error adding user to group"})
 		return
 	}
 	c.JSON(200, gin.H{
@@ -155,7 +174,7 @@ func DeleteOneGroup(c *gin.Context) {
 	var Group models.Group
 
 	database.DB.First(&Group, groupId)
-	if Group.CreatorId == creatorId  {
+	if Group.CreatorId == creatorId {
 		database.DB.Delete(&Group, groupId)
 		c.JSON(200, gin.H{
 			"message": "Group Deleted",
@@ -165,7 +184,7 @@ func DeleteOneGroup(c *gin.Context) {
 	c.JSON(403, gin.H{
 		"message": "Unauthorized",
 	})
-	
+
 }
 
 func DeleteUserOfGroupByCreatorId(c *gin.Context) {
@@ -178,24 +197,24 @@ func DeleteUserOfGroupByCreatorId(c *gin.Context) {
 	database.DB.First(&Group, groupId)
 	database.DB.First(&Group, creatorId)
 
-	if err:= database.DB.First(&Group, groupId).Error; err != nil{
-		c.JSON(404, gin.H{"error":"Group not found"})
+	if err := database.DB.First(&Group, groupId).Error; err != nil {
+		c.JSON(404, gin.H{"error": "Group not found"})
 		return
 	}
-	if Group.CreatorId != creatorId{
-		c.JSON(403, gin.H{"error":"Only the creator can delete users"})
+	if Group.CreatorId != creatorId {
+		c.JSON(403, gin.H{"error": "Only the creator can delete users"})
 		return
 	}
 	if userId == creatorId {
-        c.JSON(403, gin.H{"error": "Creator cannot remove themselve from the group"})
-        return
-    }
-	if err := database.DB.First(&User, userId).Error; err != nil{
-		c.JSON(404, gin.H{"error":"User not found"})
+		c.JSON(403, gin.H{"error": "Creator cannot remove themselve from the group"})
 		return
 	}
-	if err := database.DB.Model(&Group).Association("Users").Delete(&User); err != nil{
-		c.JSON(400, gin.H{"error":"Error deleting user from group"})
+	if err := database.DB.First(&User, userId).Error; err != nil {
+		c.JSON(404, gin.H{"error": "User not found"})
+		return
+	}
+	if err := database.DB.Model(&Group).Association("Users").Delete(&User); err != nil {
+		c.JSON(400, gin.H{"error": "Error deleting user from group"})
 		return
 	}
 	c.JSON(200, gin.H{
