@@ -110,6 +110,7 @@ export default function App() {
             <Stack.Screen name="CombattantDetail" options={{
               headerBackTitle: "Tous",
               headerTitle: "",
+              headerTintColor: "#fa580a",
               headerTransparent: true,
               headerBackTitleVisible: true}}>
               {(props) => <CombattantDetail {...props} />}

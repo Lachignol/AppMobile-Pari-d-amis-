@@ -21,7 +21,10 @@ const MyGroupScreen = ({ navigation, user }) => {
   const userID = user.user.ID
   console.log(userID);
   const [allgroupsOfUser, setAllGroupsOfUser] = useState([]);
-
+  allgroupsOfUser.map((group) => {
+    console.log("group?",group.PathOfGroupAvatar);
+  });
+  
   useFocusEffect(
     React.useCallback(() => {
       const requestGroup = async () => {
@@ -41,91 +44,90 @@ const MyGroupScreen = ({ navigation, user }) => {
 
   return (
     <>
-    <ScrollView> 
     <View
       style={{
         flex: 1,
         alignContent: "center",
         justifyContent: "center",
-        backgroundColor: "white",
+        backgroundColor: "#000000",
         height: height,
       }}
-    >
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      >
+      <View style={{ flex: 1, alignItems: "center" }}>
         <Image
                   style={styles.ImageLogo}
                   source= {require("../assets/logo.png")}
-                />
+                  />
          </View>
-      <View style={{ flexDirection: "colum" }}>
-        <Text style={{  fontSize: 20, paddingTop: 150, color: "black",fontWeight:"bold" }}>
-          Nom du groupe :
-        </Text>
-      
+      <View style={styles.createGroupButton}>
         <TouchableOpacity
           style={styles.customButton}
           onPress={() => navigation.navigate("CreateGroup")}
-        >
-          <Text style={styles.buttonText}>Créer le groupe</Text>
+          >
+          <Text style={styles.buttonText}>Créer un groupe</Text>
         </TouchableOpacity>
       </View>
 
+          <ScrollView contentContainerStyle={styles.theGroupScrollView}> 
       {allgroupsOfUser?.map((group) => (
+        
         <TouchableOpacity
           onPress={() => navigation.navigate("MyTopTabs", group)}
           key={group.ID}
         >
-          <Text style={styles.detailcCustomButton}>{group.Name}</Text>
-          <Text style={{ color: "white", fontSize: 20,fontWeight:"bold", marginTop:5, }}>
+          <View style={styles.detailcCustomButton}>
+          <Text style={{color:"#898989"}}>{group.Name}:</Text>
+          <Text style={{ color: "#898989", fontSize: 20,fontWeight:"bold" }}>
             {group.LimitMembers}
           </Text>
+          <Image 
+            style={styles.imageGroup}
+            source={{ uri: `${SERVEUR}/static/avatar/${group.PathOfGroupAvatar}` }}
+          ></Image>
+          </View>
         </TouchableOpacity>
       ))}
+      </ScrollView>
     </View>
-    </ScrollView>
 </>
   );
 };
 
 export default MyGroupScreen;
 const styles = StyleSheet.create({
+  customButton: {
+    backgroundColor: "#000000",
+    marginTop: 20,
+    borderRadius: 8,
+    width:"35%",
+    alignSelf:"center",
+    fontWeight:"bold",
+    borderBottomColor: '#202020',
+    borderBottomWidth: 2,  
+  },
+  theGroupScrollView:{
+    alignItems:"center"
+  },
   detailcCustomButton: {
-    backgroundColor: "white",
+    backgroundColor: "#202020",
     padding: 5,
     marginTop: 20,
-    width: "100%",
+    marginBottom:10,
+    width: "95%",
+    height:60,
     color: "black",
     fontSize: 20,
     fontWeight:"bold",
     borderColor: "black",
     borderRadius: 10,
     borderWidth: 1,
-    overflow: "hidden",
-    textAlign:"center",
-  
-  },
-  detailButtonText: {
-    color: "white",
-    fontWeight: "700",
-    alignItems: "center",
-    textAlign: "center",
-    fontSize: 15,
-   
-  },
-  customButton: {
-   
-    backgroundColor: "white",
-    padding: 5,
-    margin: 5,
-    marginTop: 20,
-    borderRadius: 8,
-    width: "40%",
-    bottom: 40,
-    left: 220,
-    
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-around",
+    overflow: "hidden",  
   },
   buttonText: {
-    color: "black",
+    color: "#898989",
     fontWeight: "700",
     alignItems: "center",
     textAlign: "center",
@@ -136,5 +138,9 @@ const styles = StyleSheet.create({
     height:90,
     width:"55%",
     alignItems: "center"
+  },
+  imageGroup:{
+    height:50,
+    width:50,
   }
 });

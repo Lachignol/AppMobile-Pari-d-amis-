@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, StyleSheet,Dimensions,ScrollView } from "react-native";
+import { BlurView } from 'expo-blur';
 const {width, height} = Dimensions.get('window') //detection dela dimension ecran
 
 const Detail = ({ route }) => {
@@ -12,221 +13,161 @@ const Detail = ({ route }) => {
   const UfcSilhouetteRightStance =
     "https://www.ufc.com/themes/custom/ufc/assets/img/standing-stance-right-silhouette.png";
 
-  return (
-    <ScrollView>
-
-    <View style={styles.card}>
-      {item.image_path &&
-      item.image_path !== defaultImage &&
-      item.image_path !== defaultImageW ? (
-        <Image
-          source={{ uri: item.image_path }}
-          style={styles.imageBackground}
-          resizeMode="contain"
-        />
-      ) : item.image_path == defaultImageW ? (
-        <Image
-          source={{ uri: defaultImageW2 }}
-          style={styles.imageBackgroundDefault}
-          resizeMode="contain"
-        />
-      ) : (
-        <Image
-          source={{ uri: UfcSilhouetteRightStance }}
-          style={styles.imageBackgroundDefault}
-          resizeMode="contain"
-        />
-      )}
-      <Text style={styles.title}>{item.nom_combattant}</Text>
-      <View style={styles.infoTitleMain}>
-      {item.category && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Catégorie:</Text>
-              <View style={styles.info}>
-                <Text style={styles.infoText}> {item.category}</Text>
-              </View>
+    return (
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.card}>
+          {item.image_path &&
+          item.image_path !== defaultImage &&
+          item.image_path !== defaultImageW ? (
+            <Image
+              source={{ uri: item.image_path }}
+              style={styles.imageBackground}
+              resizeMode="contain"
+            />
+          ) : item.image_path === defaultImageW ? (
+            <Image
+              source={{ uri: defaultImageW2 }}
+              style={styles.imageBackgroundDefault}
+              resizeMode="contain"
+            />
+          ) : (
+            <Image
+              source={{ uri: UfcSilhouetteRightStance }}
+              style={styles.imageBackgroundDefault}
+              resizeMode="contain"
+            />
+          )}
+          <Text style={styles.title}>{item.nom_combattant}</Text>
+          <View style={styles.blurContainer}>
+            <BlurView
+              style={styles.infoContainer}
+              intensity={50} // Ajustez l'intensité du flou
+              tint="dark"
+            >
+              {item.category && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Catégorie</Text>
+                  <Text style={styles.infoText}>{item.category}</Text>
+                </View>
+              )}
+              {item.wld && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Victoire/Égalité/Défaite</Text>
+                  <Text style={styles.infoText}>{item.wld}</Text>
+                </View>
+              )}
+              {item.age && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Âge</Text>
+                  <Text style={styles.infoText}>{item.age}</Text>
+                </View>
+              )}
+              {item.method_win_ko && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Pourcentage de KO</Text>
+                  <Text style={styles.infoText}>{item.method_win_ko}</Text>
+                </View>
+              )}
+              {item.method_win_dec && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Pourcentage de victoire aux points</Text>
+                  <Text style={styles.infoText}>{item.method_win_dec}</Text>
+                </View>
+              )}
+              {item.method_win_sub && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Pourcentage de soumission</Text>
+                  <Text style={styles.infoText}>{item.method_win_sub}</Text>
+                </View>
+              )}
+              {item.status && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Status</Text>
+                  <Text style={styles.infoText}>{item.status}</Text>
+                </View>
+              )}
+              {item.pob && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Lieu de naissance</Text>
+                  <Text style={styles.infoText}>{item.pob}</Text>
+                </View>
+              )}
+              {item.fight_style && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Style de combat</Text>
+                  <Text style={styles.infoText}>{item.fight_style}</Text>
+                </View>
+              )}
+              {item.weight && (
+                <View style={styles.infoTitleBox}>
+                  <Text style={styles.infoTitleText}>Poids</Text>
+                  <Text style={styles.infoText}>{item.weight}</Text>
+                </View>
+              )}
+            </BlurView>
           </View>
-        </>
-      )}
-      {item.wld && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Victoire/Égalité/Défaite:</Text>
-          
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.wld}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.age && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Âge:</Text>
-        
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.age}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.method_win_ko && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Pourcentage de KO:</Text>
-          
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.method_win_ko}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.method_win_dec && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>
-              Pourcentage de victoire aux points:
-            </Text>
-          
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.method_win_dec}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.method_win_sub && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Pourcentage de soumission:</Text>
-          
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.method_win_sub}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.status && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Status:</Text>
-          
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.status}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.pob && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Lieu de naissance:</Text>
-          
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.pob}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.fight_style && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Style de combat:</Text>
-         
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.fight_style}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      {item.weight && (
-        <>
-          <View style={styles.infoTitleBoxe}>
-            <Text style={styles.infoTitleText}>Poids:</Text>
-         
-          <View style={styles.info}>
-            <Text style={styles.infoText}>{item.weight}</Text>
-          </View>
-          </View>
-        </>
-      )}
-      </View>
-    </View>
-    </ScrollView>
-  );
-};
-export default Detail;
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "black",
-    flexDirection: "column",
-    alignItems: "center",
-    height: height * 1.2,
-  },
-  title: {
-    textAlign: "center",
-    color: "white",
-    fontSize: 30,
-    fontWeight: "bold",
-    bottom:13,
-  },
-  text: {
-    color: "black",
-    marginTop: 50,
-    fontSize: 20,
-    height: "55%",
-  },
-  imageBackground: {
-    marginTop: 80,
-    width: 200,
-    height: 200,
-    justifyContent: "flex-start",
-  },
-  imageBackgroundDefault: {
-    marginTop: 80,
-    width: 200,
-    height: 200,
-    justifyContent: "flex-start", 
-    shadowColor: "white",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
-    elevation: 15,
-  },
-  infoTitleMain: {
-    margin: 1,
-    borderRadius: 10,
-    padding: 2,
-    backgroundColor: "#fd9858",
-    height:"auto",
-  },
-  infoTitleBoxe: {
-    margin: 1,
-    borderRadius: 10,
-    padding: 2,
-    alignContent: "flex-start",
-  },
-  infoTitleText: {
-    color: "black",
-    fontSize: 20,
-    textAlign: "left", 
-    shadowRadius: 4,
-    shadowOpacity: 0.4,
-    shadowColor: "#fa580a",
-    width: "100%", 
-  },
-  info: {
-    marginBottom: 1,
-    padding: 2,
-    color: "white",
-    alignItems: "flex-start", 
-  },
-  infoText: {
-    color: "white",
-    fontSize: 15,
-    fontWeight: "bold",
-    width: "100%",
-    marginLeft:0,
-  },
-});
+        </View>
+      </ScrollView>
+    );
+  };
+  
+  export default Detail;
+  
+  const styles = StyleSheet.create({
+    card: {
+      backgroundColor: "#000000",
+      flexDirection: "column",
+      alignItems: "center",
+      height: height * 1.2,
+    },
+    title: {
+      textAlign: "center",
+      color: "#D8D8D8",
+      fontSize: 30,
+      fontWeight: "bold",
+      marginVertical: 10,
+    },
+    imageBackground: {
+      marginTop: 90,
+      width: 200,
+      height: 200,
+      justifyContent: "center",
+    },
+    imageBackgroundDefault: {
+      marginTop: 90,
+      width: 200,
+      height: 200,
+      justifyContent: "center", 
+      shadowColor: "white",
+      shadowOffset: { width: 0, height: 5 },
+      shadowOpacity: 1,
+      shadowRadius: 10,
+      elevation: 15,
+    },
+    blurContainer: {
+      width: width * 0.9, // Ajustez la largeur si nécessaire
+      borderRadius: 10,
+      overflow: "hidden", // Assure que le flou ne dépasse pas les bords arrondis
+    },
+    infoContainer: {
+      padding: 10,
+      backgroundColor: 'rgba(0, 0, 0, 0.6)', // Fond semi-transparent pour meilleure visibilité
+      height:"auto"
+    },
+    infoTitleBox: {
+      marginBottom: 10,
+      borderRadius: 10,
+      padding: 5,
+      backgroundColor: '#202020', // Optionnel : ajoutez un fond semi-transparent
+    },
+    infoTitleText: {
+      color: "#898989",
+      fontSize: 20,
+      textAlign: "left",
+    },
+    infoText: {
+      color: "#D8D8D8",
+      fontSize: 15,
+      fontWeight: "bold",
+    },
+  });
