@@ -7,7 +7,6 @@ import (
 type Group struct {
 	gorm.Model
 	Name         string
-	LimitMembers *uint8
 	// Sports []string
 	CreatorId string
 	PathOfGroupAvatar  string

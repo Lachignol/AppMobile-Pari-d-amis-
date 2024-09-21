@@ -7,36 +7,88 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Image,
 } from "react-native";
 import { SERVEUR } from '@env';
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import * as ImagePicker from "expo-image-picker";
 
 const CreateGroup = ({ navigation, user }) => {
   const [groupName, setGroupName] = useState("");
   const [numberOfMembers, setNumberOfMembers] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageName, setImageName] = useState(null);
+  const [imageType, setImageType] = useState(null);
+  const [hasPermission, setHasPermission] = useState(null);
   const userId = user.user.ID;
+  const myUserInfo = user.user
+  console.log("mon user?", myUserInfo);
+  
 
-  const createGroupAndNavigate = async () => {
-    const membersCount = parseInt(numberOfMembers, 10);
 
-    if (isNaN(membersCount) || membersCount <= 0) {
-      alert("Veuillez entrer un nombre de membres valide.");
+  useEffect(() => {
+    requestPermission();
+  }, [requestPermission]);
+
+  const requestPermission = useCallback(async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    setHasPermission(status === "granted");
+    console.log(status);
+    return status === "granted";
+  }, []);
+
+  const pickGroupImage = async () => {
+    let permissionResult = hasPermission;
+    if (permissionResult === null) {
+      permissionResult = await requestPermission();
+    }
+
+    if (!permissionResult) {
+      Alert.alert(
+        "Permission refusée",
+        "Nous avons besoin de votre permission pour accéder à vos photos.",
+        [{ text: "OK" }]
+      );
       return;
     }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      setImageName(result.assets[0].fileName);
+      setImageType(result.assets[0].type);
+      console.log("Image sélectionnée:", result.assets[0].uri);
+      console.log("Image format:", result.assets[0].mimeType);
+      console.log("Nom de l'Image :", result.assets[0].fileName);
+      console.log("Type de l'Image:", result.assets[0].type);
+      console.log("", result.assets[0].exif);
+    }
+  };
+
+  const createGroupWithImage = async () => {
+    const formData = new FormData();
+    formData.append("Avatar", {
+      uri: image,
+      type: imageType,
+      name: myUserInfo.Pseudo,
+    });
+    formData.append("Name", groupName)
 
     try {
       const response = await fetch(
         `${SERVEUR}/group/createGroup/${userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: groupName,
-            LimitMembers: membersCount,
-          }),
-        }
+          {
+            method: "POST",
+            body: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
       );
 
       if (!response.ok) {
@@ -58,7 +110,7 @@ const CreateGroup = ({ navigation, user }) => {
 
   return (
     <View style={{ flex: 1, alignItems: "center", backgroundColor: "black" }}>
-      <View style={{ flexDirection: "colum", top: 200 }}>
+      <View style={styles.childBox}>
         <Text style={styles.customButton}>Nom du groupe :</Text>
         <TextInput
           style={{
@@ -68,25 +120,13 @@ const CreateGroup = ({ navigation, user }) => {
             paddingTop: 10,
           }}
           placeholder="Entrez le nom du groupe"
-          placeholderTextColor={"red"}
+          placeholderTextColor={"#898989"}
           value={groupName}
           onChangeText={setGroupName}
-        />
-        <Text style={styles.customButton}>Nombre de membres :</Text>
-        <TextInput
-          style={{
-            fontSize: 20,
-            color: "white",
-            textAlign: "center",
-            paddingTop: 10,
-          }}
-          placeholder="Entrez le nombre de membres"
-          placeholderTextColor={"red"}
-          value={numberOfMembers}
-          onChangeText={setNumberOfMembers}
-          keyboardType="numeric"
-        />
-        <TouchableOpacity onPress={createGroupAndNavigate}>
+        />        
+        <Button title="Choisir une image" onPress={pickGroupImage}/>
+        {image && <Image source={{ uri: image }} style={styles.image} />}
+        <TouchableOpacity onPress={createGroupWithImage}>
           <Text style={styles.customButton}>Créer le groupe</Text>
         </TouchableOpacity>
       </View>
@@ -96,18 +136,31 @@ const CreateGroup = ({ navigation, user }) => {
 export default CreateGroup;
 
 const styles = StyleSheet.create({
+  childBox:{
+    flexDirection: "colum", 
+    height:"45%",
+    width:"100%",
+    justifyContent:"center",
+    alignItems:"center",
+    top: 200, 
+    backgroundColor: "#202020", 
+    borderRadius:10,
+  },
   customButton: {
     color: "white",
     fontSize: 30,
+    width:"90%",
     fontWeight: "bold",
-    backgroundColor: "red",
-    padding: 5,
+    backgroundColor: "#898989",
+    padding: 10,
     margin: 5,
-    marginTop: 20,
     textAlign: "center",
-    borderColor: "red",
     borderRadius: 10,
-    borderWidth: 1,
     overflow: "hidden",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginVertical: 10,
   },
 });

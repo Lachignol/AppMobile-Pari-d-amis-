@@ -104,7 +104,12 @@ export default function App() {
             <Stack.Screen name="MyTopTabs" options={{}}>
               {(props) => <MyTopTabs {...props} user={user}/>}
             </Stack.Screen>
-            <Stack.Screen name="CreateGroup" options={{}}>
+            <Stack.Screen name="CreateGroup" options={{
+              headerTitle: "Crée ton groupe",
+              headerTintColor: "#fa580a",
+              headerTransparent: true,
+              headerBackTitleVisible: true
+            }}>
               {(props) => <CreateGroup {...props} user={user}/>}
             </Stack.Screen>
             <Stack.Screen name="CombattantDetail" options={{

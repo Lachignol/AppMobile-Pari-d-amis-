@@ -23,7 +23,6 @@ func CreateGroup(c *gin.Context) {
 
 	var body struct {
 		Name              string
-		LimitMembers  	    *uint8
 		Users             []models.User
 		Bets              []models.Bet
 	}
@@ -49,7 +48,7 @@ func CreateGroup(c *gin.Context) {
 
 	var User models.User
 	database.DB.First(&User, userID)
-	group := models.Group{Name: body.Name, LimitMembers: body.LimitMembers, CreatorId: userID, PathOfGroupAvatar: pathOfGroupAvatar}
+	group := models.Group{Name: body.Name, CreatorId: userID, PathOfGroupAvatar: pathOfGroupAvatar}
 	result := database.DB.Create(&group)
 	database.DB.Model(&group).Association("Users").Append(&User)
 	if result.Error != nil {
@@ -154,14 +153,13 @@ func UpdateGroup(c *gin.Context) {
 	groupId := c.Param("GroupID")
 	var body struct {
 		Name         string
-		LimitMembers *uint8
 	}
 	c.Bind(&body)
 
 	var Group models.Group
 	database.DB.First(&Group, groupId)
 
-	database.DB.Model(&Group).Updates(models.Group{Name: body.Name, LimitMembers: body.LimitMembers})
+	database.DB.Model(&Group).Updates(models.Group{Name: body.Name})
 
 	c.JSON(200, gin.H{
 		"message": Group,
