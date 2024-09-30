@@ -56,7 +56,7 @@ const MyGroupScreen = ({ navigation, user }) => {
       <View style={{ flex: 1, alignItems: "center" }}>
         <Image
                   style={styles.ImageLogo}
-                  source= {require("../assets/logo.png")}
+                  source= {require("../assets/logoBlanco.png")}
                   />
          </View>
       <View style={styles.createGroupButton}>
@@ -68,9 +68,9 @@ const MyGroupScreen = ({ navigation, user }) => {
         </TouchableOpacity>
       </View>
 
+        <View style={styles.viewOfScrollView}>
           <ScrollView contentContainerStyle={styles.theGroupScrollView}> 
       {allgroupsOfUser?.map((group) => (
-        
         <TouchableOpacity
           onPress={() => navigation.navigate("MyTopTabs", group)}
           key={group.ID}
@@ -88,6 +88,7 @@ const MyGroupScreen = ({ navigation, user }) => {
         </TouchableOpacity>
       ))}
       </ScrollView>
+        </View>
     </View>
 </>
   );
@@ -95,6 +96,15 @@ const MyGroupScreen = ({ navigation, user }) => {
 
 export default MyGroupScreen;
 const styles = StyleSheet.create({
+  ImageLogo:{
+    top:70,
+    height:90,
+    width:"55%",
+    alignItems: "center",
+  },
+  createGroupButton:{
+    
+  },
   customButton: {
     backgroundColor: "#000000",
     marginTop: 20,
@@ -105,8 +115,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#202020',
     borderBottomWidth: 2,  
   },
+  viewOfScrollView:{
+    height:'75%'
+  },
   theGroupScrollView:{
-    alignItems:"center"
+    alignItems:"center",
   },
   detailcCustomButton: {
     backgroundColor: "#202020",
@@ -114,7 +127,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom:10,
     width: "95%",
-    height:60,
+    height:40,
     color: "black",
     fontSize: 20,
     fontWeight:"bold",
@@ -132,12 +145,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     fontSize: 15,
-  },
-  ImageLogo:{
-    top:40,
-    height:90,
-    width:"55%",
-    alignItems: "center"
   },
   imageGroup:{
     height:50,

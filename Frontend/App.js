@@ -105,6 +105,7 @@ export default function App() {
               {(props) => <MyTopTabs {...props} user={user}/>}
             </Stack.Screen>
             <Stack.Screen name="CreateGroup" options={{
+              headerBackTitle: "Groupes",
               headerTitle: "Crée ton groupe",
               headerTintColor: "#fa580a",
               headerTransparent: true,

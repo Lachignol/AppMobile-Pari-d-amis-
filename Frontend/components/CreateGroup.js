@@ -22,7 +22,7 @@ const CreateGroup = ({ navigation, user }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const userId = user.user.ID;
   const myUserInfo = user.user
-  console.log("mon user?", myUserInfo);
+  // console.log("mon image?", image);
   
 
 
@@ -62,11 +62,11 @@ const CreateGroup = ({ navigation, user }) => {
       setImage(result.assets[0].uri);
       setImageName(result.assets[0].fileName);
       setImageType(result.assets[0].type);
-      console.log("Image sélectionnée:", result.assets[0].uri);
-      console.log("Image format:", result.assets[0].mimeType);
-      console.log("Nom de l'Image :", result.assets[0].fileName);
-      console.log("Type de l'Image:", result.assets[0].type);
-      console.log("", result.assets[0].exif);
+      // console.log("Image sélectionnée:", result.assets[0].uri);
+      // console.log("Image format:", result.assets[0].mimeType);
+      // console.log("Nom de l'Image :", result.assets[0].fileName);
+      // console.log("Type de l'Image:", result.assets[0].type);
+      // console.log("", result.assets[0].exif);
     }
   };
 
@@ -75,42 +75,50 @@ const CreateGroup = ({ navigation, user }) => {
     formData.append("Avatar", {
       uri: image,
       type: imageType,
-      name: myUserInfo.Pseudo,
+      name: imageName,
     });
     formData.append("Name", groupName)
+    // console.log(formData._parts[1]);
+    
 
-    try {
-      const response = await fetch(
-        `${SERVEUR}/group/createGroup/${userId}`,
-          {
-            method: "POST",
-            body: formData,
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Erreur lors de la création du groupe (statut ${response.status})`
+    if(formData._parts[1] != ""){
+      try {
+        const response = await fetch(
+          `${SERVEUR}/group/createGroup/${userId}`,
+            {
+              method: "POST",
+              body: formData,
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
         );
+  
+        if (!response.ok) {
+          throw new Error(
+            `Erreur lors de la création du groupe (statut ${response.status})`
+          );
+        }
+        if (response.status === 200) {
+          Alert.alert("Groupe créer avec succès");
+          navigation.navigate("bottomNavGroup");
+        }
+  
+        const newGroup = await response.json();
+        console.log("Nouveau groupe:", newGroup.group);
+      } catch (error) {
+        console.error("Erreur lors de la création du groupe", error);
       }
-      if (response.status === 200) {
-        Alert.alert("Groupe créer avec succès");
-        navigation.navigate("Groupes");
-      }
-
-      const newGroup = await response.json();
-      console.log("Nouveau groupe:", newGroup.group);
-    } catch (error) {
-      console.error("Erreur lors de la création du groupe", error);
+    }else{
+      Alert.alert("Veuillez entrer un nom de groupe");
+      console.log("pas de nom de groupe");
     }
+
   };
 
   return (
     <View style={{ flex: 1, alignItems: "center", backgroundColor: "black" }}>
-      <View style={styles.childBox}>
+      <View style={[styles.childBox, image && !null ?  styles.withPic : styles.withoutPic]}>
         <Text style={styles.customButton}>Nom du groupe :</Text>
         <TextInput
           style={{
@@ -138,13 +146,19 @@ export default CreateGroup;
 const styles = StyleSheet.create({
   childBox:{
     flexDirection: "colum", 
-    height:"45%",
+    height:"30%",
     width:"100%",
     justifyContent:"center",
     alignItems:"center",
     top: 200, 
     backgroundColor: "#202020", 
     borderRadius:10,
+  },
+  withPic:{
+    height:"45%",
+  },
+  withoutPic:{
+    height:"30%",
   },
   customButton: {
     color: "white",

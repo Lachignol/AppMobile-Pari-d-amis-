@@ -33,7 +33,7 @@ const MyTabs = ({setUser, user}) => {
      >
         {()=><Stack.Navigator >
      <Stack.Screen name={"Accueil"} options={{ headerShown: false }}>
-       {(props)=><Home {...props} />}
+       {(props)=><Home {...props} user={user} />}
      </Stack.Screen>
      </Stack.Navigator>
       }
