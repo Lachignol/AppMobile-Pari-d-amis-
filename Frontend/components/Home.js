@@ -74,7 +74,7 @@ const Home = ( {navigation, user} ) => {
             <Text style={styles.groupNavigateText}>Crée ton groupe !</Text>
           </TouchableOpacity>
         </View>
-        {allGroupsOfUser &&(
+        {allGroupsOfUser.length > 0 ? (
         <ScrollView horizontal={true} style={styles.scrollViewHorizontal} >
             {allGroupsOfUser.map((group) => (
           <TouchableOpacity 
@@ -90,10 +90,11 @@ const Home = ( {navigation, user} ) => {
           </TouchableOpacity>
             ))}
         </ScrollView>
-        )}
+        ): 
         <View>
-          <Text style={styles.textIfUserNoGroup}>test</Text>
+          <Text style={styles.textIfUserNoGroup}>N'hésitez pas à créer vos propre groupes, il seront affichés juste ici</Text>
         </View>
+      }
     </View>
   );
 };
@@ -158,6 +159,11 @@ const styles = StyleSheet.create({
     marginTop:10
   },
   textIfUserNoGroup:{
-    color:'white'
+    marginTop:5,
+    color:'white',
+    fontSize: 15,
+    textAlign: 'center',
+    marginHorizontal:10,
+    flexWrap:'wrap',
   },
 });
