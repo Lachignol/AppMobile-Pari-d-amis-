@@ -17,6 +17,7 @@
     "axios": "^1.6.5",
     "dotenv": "^16.4.5",
     "expo": "^51.0.9",
+    "expo-blur": "~13.0.2",
     "expo-image-picker": "~15.0.7",
     "expo-secure-store": "^13.0.1",
     "expo-status-bar": "^1.12.1",
@@ -36,8 +37,7 @@
     "react-native-screens": "^3.31.1",
     "react-native-swiper": "^1.6.0",
     "react-native-tab-view": "^3.5.2",
-    "react-native-vector-icons": "^10.1.0",
-    "expo-blur": "~13.0.2"
+    "react-native-vector-icons": "^10.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.6"

@@ -82,7 +82,7 @@ const MyGroupScreen = ({ navigation, user }) => {
           </Text>
           <Image 
             style={styles.imageGroup}
-            source={{ uri: `${SERVEUR}/static/avatar/${group.PathOfGroupAvatar}` }}
+            source={{ uri: group.PathOfGroupAvatar }}
           ></Image>
           </View>
         </TouchableOpacity>

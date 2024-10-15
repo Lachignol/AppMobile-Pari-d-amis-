@@ -71,6 +71,14 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-require github.com/lib/pq v1.10.9
+require (
+	github.com/cloudinary/cloudinary-go/v2 v2.9.0
+	github.com/lib/pq v1.10.9
+)
 
-require github.com/kr/text v0.2.0 // indirect
+require (
+	github.com/creasty/defaults v1.7.0 // indirect
+	github.com/google/uuid v1.5.0 // indirect
+	github.com/gorilla/schema v1.4.1 // indirect
+	github.com/kr/text v0.2.0 // indirect
+)
