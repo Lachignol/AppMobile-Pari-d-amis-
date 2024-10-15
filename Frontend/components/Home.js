@@ -75,15 +75,16 @@ const Home = ( {navigation, user} ) => {
           </TouchableOpacity>
         </View>
         {allGroupsOfUser.length > 0 ? (
-        <ScrollView horizontal={true} style={styles.scrollViewHorizontal} >
+        <ScrollView horizontal={true} style={styles.scrollViewHorizontal} contentContainerStyle={{justifyContent:"center", height:"10%" }}>
             {allGroupsOfUser.map((group) => (
           <TouchableOpacity 
           onPress={() => navigation.navigate("MyTopTabs", group)}
           key={group.ID}
+          style={{height:"10%"}}
           >
           <View style={{flexDirection:"row"}}>
           <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{ uri: `${SERVEUR}/static/avatar/${group.PathOfGroupAvatar}` }} />
+            <Image style={styles.image} source={{ uri: group.PathOfGroupAvatar }} />
             <Text style={styles.card}>{group.Name}</Text>
           </View>
           </View>
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: "black",
     alignItems:"center",
+    height: height,
   },
   ImageLogo:{
     top:50,
@@ -140,6 +142,8 @@ const styles = StyleSheet.create({
   },
   scrollViewHorizontal:{
     flexDirection: 'row',
+    backgroundColor:"#202020",
+    width:"50%",
   },
   imageContainer:{
     marginRight: 10,
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
     marginTop:10
   },
   textIfUserNoGroup:{
-    marginTop:5,
+    marginTop:150,
     color:'white',
     fontSize: 15,
     textAlign: 'center',

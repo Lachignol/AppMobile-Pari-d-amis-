@@ -141,11 +141,13 @@ const Account = ({ setUser, user, navigation }) => {
       const result = await response.json();
       Alert.alert("Succès", "L'image a été uploadée avec succès.");
       setShowImage(false);
+      console.log("mon result ?", result);
+      
       setUser((prevUser) => ({
         ...prevUser,
         user: {
           ...prevUser.user,
-          PathOfAvatar: User.Pseudo,
+          PathOfAvatar: result.message.PathOfAvatar,
         },
       }));
       console.log(User.user);
@@ -166,8 +168,8 @@ const Account = ({ setUser, user, navigation }) => {
         </Text>
         {showImage && (
           <Image
-            source={{ uri: `${SERVEUR}/static/avatar/${User.PathOfAvatar}` }}
-            style={styles.avatar}
+            style={styles.avatar} 
+            source={{ uri: User.PathOfAvatar }}
           />
         )}
         <View style={styles.imageContainer}>
