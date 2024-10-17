@@ -176,7 +176,7 @@ func SignUp(c *gin.Context) {
 		}
 	} else {
 		{
-			pathOfAvatar, error = helper.UploadFile(c, file)
+			pathOfAvatar, error = helper.UploadFileForProfile(c, file)
 			if error != nil {
 				log.Println("probleme lors de l'upload de l'avatar")
 			}
@@ -259,7 +259,7 @@ func UpdateUser(c *gin.Context) {
 			log.Println("Pas d'avatar uploader")
 		}
 	} else {
-		pathOfAvatar, err = helper.UploadFile(c, file)
+		pathOfAvatar, err = helper.UploadFileForProfile(c, file)
 		if err != nil {
 			log.Println("probleme lors de l'upload de l'avatar")
 		}
@@ -287,7 +287,7 @@ func UpdateAvatarOfUser(c *gin.Context) {
 			log.Println("Pas d'avatar uploader")
 		}
 	}
-	pathOfAvatar, err = helper.UploadFile(c, file)
+	pathOfAvatar, err = helper.UploadFileForProfile(c, file)
 	log.Println(pathOfAvatar)
 	if err != nil {
 		c.JSON(http.StatusFailedDependency, gin.H{

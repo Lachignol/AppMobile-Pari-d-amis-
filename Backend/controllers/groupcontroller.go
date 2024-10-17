@@ -40,7 +40,7 @@ func CreateGroup(c *gin.Context) {
 			log.Println("Pas d'avatar uploader")
 		}
 	} else {
-		pathOfGroupAvatar, err = helper.UploadFile(c, file)
+		pathOfGroupAvatar, err = helper.UploadFileForGroup(c, file)
 		if err != nil {
 			log.Println("probleme lors de l'upload de l'avatar")
 		}
